@@ -1,6 +1,3 @@
-package com.bridgeit.FunctionalProgram;
-
-import com.bridgeit.Utility;
 /******************************************************************************
 *  Purpose: to make gamble play till till he reach his goal amount or become nill or he 
 *           had played max number of time then print the number of times he won
@@ -11,6 +8,11 @@ import com.bridgeit.Utility;
 *  @since   05-03-2018
 *
 ******************************************************************************/
+
+package com.bridgeit.FunctionalProgram;
+
+import com.bridgeit.utility.Utility;
+
 public class Gambler 
 {
 	public static void main(String[] args) 

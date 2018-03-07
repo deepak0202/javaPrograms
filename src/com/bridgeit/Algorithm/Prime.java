@@ -1,6 +1,3 @@
-package com.bridgeit.Algorithm;
-
-import com.bridgeit.Utility;
 /******************************************************************************
 *  Purpose: to print prime number b/w 1 to 1000
 *  @author  Deepak Singh
@@ -8,6 +5,11 @@ import com.bridgeit.Utility;
 *  @since   05-03-2018
 *
 ******************************************************************************/
+
+package com.bridgeit.Algorithm;
+
+import com.bridgeit.utility.Utility;
+
 public class Prime 
 {
 	public static void main(String[] args) 

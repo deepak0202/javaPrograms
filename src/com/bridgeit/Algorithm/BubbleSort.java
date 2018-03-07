@@ -1,8 +1,3 @@
-package com.bridgeit.Algorithm;
-
-import java.util.Arrays;
-import com.bridgeit.Utility;
-
 /******************************************************************************
 *  Purpose: to sort the array useing bubble sort algo
 *  @author  Deepak Singh
@@ -10,6 +5,14 @@ import com.bridgeit.Utility;
 *  @since   05-03-2018
 *
 ******************************************************************************/
+
+package com.bridgeit.Algorithm;
+
+import java.util.Arrays;
+
+import com.bridgeit.utility.Utility;
+
+
 public class BubbleSort 
 {
 	public static void main(String[] args) 

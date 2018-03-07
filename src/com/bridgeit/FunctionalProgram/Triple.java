@@ -1,7 +1,3 @@
-package com.bridgeit.FunctionalProgram;
-
-import com.bridgeit.Utility;
-
 /******************************************************************************
 *  Purpose: to print the triplet in array whose sum is zero
 *  @author  Deepak Singh
@@ -9,6 +5,12 @@ import com.bridgeit.Utility;
 *  @since   05-03-2018
 *
 ******************************************************************************/
+
+package com.bridgeit.FunctionalProgram;
+
+import com.bridgeit.utility.Utility;
+
+
 public class Triple 
 {
 	public static void main(String[] args) 

@@ -1,7 +1,3 @@
-package com.bridgeit.Algorithm;
-
-import com.bridgeit.Utility;
-
 /******************************************************************************
 *  Purpose: reads in three command-line arguments P, Y, and R and calculates the monthly payments
 *           you would have to make over Y years to pay off a P principal loan amount at R per cent 
@@ -11,6 +7,12 @@ import com.bridgeit.Utility;
 *  @since   05-03-2018
 *
 ******************************************************************************/
+
+package com.bridgeit.Algorithm;
+
+import com.bridgeit.utility.Utility;
+
+
 public class MonthlyPayment 
 {
 	public static void main(String[] args) 

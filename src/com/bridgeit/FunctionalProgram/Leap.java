@@ -1,6 +1,3 @@
-package com.bridgeit.FunctionalProgram;
-
-import com.bridgeit.Utility;
 /******************************************************************************
 *  Purpose:  to take year as input and print whether it is leap or not
 
@@ -10,6 +7,11 @@ import com.bridgeit.Utility;
 *  @since   05-03-2018
 *
 ******************************************************************************/
+
+package com.bridgeit.FunctionalProgram;
+
+import com.bridgeit.utility.Utility;
+
 class Leap
 {
   public static void main(String[] args)

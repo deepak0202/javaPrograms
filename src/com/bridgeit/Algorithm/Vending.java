@@ -1,8 +1,3 @@
-package com.bridgeit.Algorithm;
-
-import java.util.HashSet;
-import com.bridgeit.Utility;
-
 /******************************************************************************
 *  Purpose: print the notes return by vending machine and and min number of notes to be return
 *  @author  Deepak Singh
@@ -10,6 +5,14 @@ import com.bridgeit.Utility;
 *  @since   05-03-2018
 *
 ******************************************************************************/
+
+package com.bridgeit.Algorithm;
+
+import java.util.HashSet;
+
+import com.bridgeit.utility.Utility;
+
+
 public class Vending 
 {
 	static HashSet h = new HashSet();

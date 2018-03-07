@@ -1,6 +1,3 @@
-package com.bridgeit.Algorithm;
-
-import com.bridgeit.Utility;
 /******************************************************************************
 *  Purpose: check whether to string taken as input are anagram or not
 *  @author  Deepak Singh
@@ -8,6 +5,11 @@ import com.bridgeit.Utility;
 *  @since   05-03-2018
 *
 ******************************************************************************/
+
+package com.bridgeit.Algorithm;
+
+import com.bridgeit.utility.Utility;
+
 public class Anagaram 
 {
 	public static void main(String[] args) 

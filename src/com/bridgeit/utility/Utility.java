@@ -1,10 +1,23 @@
-package com.bridgeit;
+package com.bridgeit.utility;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileReader;
+import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.util.ArrayList;
+import java.util.Deque;
 import java.util.HashSet;
+import java.util.List;
+import java.util.Queue;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.TreeSet;
+
+import com.bridgeit.dataStructure.LinkedList;
+import com.bridgeit.dataStructure.Linkedlist;
+import com.bridgeit.dataStructure.Stack;;
 
 public class Utility 
 {
@@ -499,6 +512,10 @@ public class Utility
 		}
 		System.out.println("game over");
 	}
+	/**
+	 * @param x = input 2d array of String type
+	 * @return integer  number of " " in the array
+	 */
 	public static int placeLeft(String[][] x)
 	{
 		int count = 0;
@@ -1052,9 +1069,492 @@ public	static void hello(String s)
 				number1 = number1/10;
 			}
 			System.out.println(number2);
-			
+	}
+		 /**
+		 * @param str = string input 
+		 * @param l = index to be kept constant
+		 * @param r = length of string
+		 * print all permutation of string pass 
+		 */
+		public static void permute(String str, int l, int r)
+		    {
+		        if (l == r)
+		            System.out.println(str);
+		        else
+		        {
+		            for (int i = l; i <= r; i++)
+		            {
+		                str = swap(str,l,i);
+		                permute(str, l+1, r);
+		                str = swap(str,l,i);
+		            }
+		        }
+		    }
+		 /**
+		 * @param a=name of the string whose charater are to be swaped
+		 * @param i= index of character to be swaped
+		 * @param j= index of character to be swaped
+		 * @return new string with its character swaped
+		 */
+		public static String swap(String a, int i, int j)
+		    {
+		        char temp;
+		        char[] charArray = a.toCharArray();
+		        temp = charArray[i] ;
+		        charArray[i] = charArray[j];
+		        charArray[j] = temp;
+		        return String.valueOf(charArray);
+		    }
+	/**
+	 * @throws IOException while reading file if file is not present
+	 */
+	public	static void testDataTolinklistController() throws IOException
+		{
+			LinkedList linkedlist = new LinkedList();
+			LinkedList refernces = textDataToLinklist("linkedlistdata.text", linkedlist);
+			Utility utility = new Utility();
+			System.out.println("enter the word to be serched in linkedlist");
+			String wordToBeSerched = utility.inputString();
+			if(refernces.search(wordToBeSerched))
+			{
+				refernces.delete(wordToBeSerched);
 			}
+			else
+			{
+				refernces.add(wordToBeSerched);
+			}
+			linkedlistdatatofile(refernces);
+		}
+	/**
+	 * @param fileName from which file we will read data
+	 * @param refernces linkedlist refrense variable
+	 * @return linkedlist refrence variable in which file data is stored
+	 * @throws IOException while trying to read daa from file if file is not found
+	 */
+	public	static LinkedList textDataToLinklist(String fileName, LinkedList refernces) throws IOException
+		{
+			BufferedReader bufferedReadder = new BufferedReader(new FileReader(fileName));
+			String line = bufferedReadder.readLine();
+			while(line != null)
+			{
+				String[] array = line.split(" ");
+				for(String data : array)
+				{
+					refernces.add(data);
+				}
+				line = bufferedReadder.readLine();
+			}
+			return refernces;
+		}
+	/**
+	 * @param refernces refrence variable of linklist in which data is stored
+	 * @throws IOException if while writeing data to file file is not present
+	 * put linklist data in the file 
+	 */
+	public	static void linkedlistdatatofile(LinkedList refernces) throws IOException
+		{
+			File file = new File("linkedlistdata1.text");
+			file.createNewFile();
+			PrintWriter printWriter = new PrintWriter("linkedlistdata1.text");
+			for(int i = 0; i < refernces.size();i++)
+			{
+				printWriter.print((String)refernces.dataAtPosition(i));
+				printWriter.print(" ");
+			}
+			printWriter.flush();
+		}
+	/**
+	 * @throws IOException for file not found
+	 * read integer from file and save it in sorted linked list them take integer as input
+	 * if present in linked list delete it else add it in linked list 
+	 * then print data of linkedlist in file 
+	 */
+	public static void readIntegerController() throws IOException
+	{
+		Linkedlist linkedlist = new Linkedlist();
+		BufferedReader bufferedReader = new BufferedReader(new FileReader("Integerdata.text"));
+		String line = bufferedReader.readLine();
+		while(line != null)
+		{
+			String[] array = line.split(" ");
+			for(String words : array)
+			{
+				linkedlist.add(Integer.parseInt(words));
+			}
+			line = bufferedReader.readLine();
+		}
+		Utility utility = new Utility();
+		System.out.println("enter the digit to be searched");
+		int digit = utility.inputInteger();
+		if(linkedlist.search(digit))
+		{
+			linkedlist.delete(digit);
+		}
+		else
+		{
+			linkedlist.add(digit);
+		}
+		integerDataToFile(linkedlist,"integerdata1.text");
+	}
+	/**
+	 * @param refrences = refrence variable of linkedlist 
+	 * @param fileName = name of file in which data is to be pushed
+	 * @throws IOException = handleing exception if file is not found
+	 * put data in linkedlist to file
+	 */
+	public static void integerDataToFile(Linkedlist refrences,String fileName) throws IOException
+	{
+		File file = new File("integerdata1.text");
+		file.createNewFile();
+		PrintWriter printWriter = new PrintWriter(fileName);
+		for(int i = 0; i< refrences.size();i++)
+		{
+			printWriter.print(refrences.dataAtPosition(i));
+			printWriter.print(" ");
+		}
+		printWriter.flush();
+		System.out.println("done");
+	}
+	/**
+	 * @param ArithmeticExpression = string ArithmeticExpression which is to be checked balance or not
+	 * @return boolean true if expression is balanced else false
+	 */
+	public static	boolean simpleBalancedParentheses(String ArithmeticExpression)
+	{
+		Stack stack = new Stack();
+		for(int i = 0; i < ArithmeticExpression.length();i++)
+		{
+			if(ArithmeticExpression.substring(i, i+1).equals("("))
+			{
+				stack.push(1);
+			}
+			else if(ArithmeticExpression.substring(i, i+1).equals(")"))
+					{
+					try 
+					{
+						stack.pop();
+					}
+					catch (NullPointerException e) 
+					{
+						return false;
+					}
+					}
+		}
+		if(stack.isEmpty())
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}
+	}
+	
+	/**
+	 * @param month 
+	 * @param year
+	 * @return int values cospondeing to week day of 1st of that month
+	 */
+	public static int dayOfMonthStarting(int month,int year)
+	{
+		int y = year;
+		int m = month;
+		int d = 1;
+		int y0 = y-((14-m)/12);
+		int x = y0 + (y0/4) - (y0/100) + (y0/400);
+		int m0 = m + (12*((14-m)/12)) -2;
+		int d0 = (d+x+((31*m0)/12)) % 7;
+		return d0;
+	}
+/**
+ * @param month
+ * @param year
+ * print the month calender of given month and year
+ */
+public static	void printMonthCalender(int month,int year)
+	{
+		int monthstart = 0;
+		String[][] x = new String[7][7];
+		x[0][0]="S";x[0][1]="M";x[0][2]="T";x[0][3]="W";x[0][4]="TH";x[0][5]="F";x[0][6]="SA";
+		for(int i = 1; i <=6;i++)
+		{
+			for(int j = 0; j <= 6;j++)
+			{
+				x[i][j]=" ";
+			}
+		}
+		int maxdays = 0;
+		if(month == 1 || month== 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
+		{
+			maxdays = 31;
+		}
+		else if(month ==4 || month == 6 || month == 9 || month == 11)
+		{
+			maxdays = 30;
+		}
+		else
+		{
+			if(leap(year))
+			{
+				maxdays = 29;
+			}
+			else
+			{
+				maxdays = 28;
+			}
+		}
+		for(int i = 1; i <= 5; i++)
+		{
+			int begin = 0;
+			if(i==1)
+			{
+				 begin = dayOfMonthStarting(month, year);
+				
+			}
+			
+			for(int j = begin;j<=6;j++)
+			{
+				x[i][j]=Integer.toString(++monthstart);
+				if(monthstart == maxdays)
+				{
+					break;
+				}
+			}
+		}
+		for(int i = 0; i <=6;i++)
+		{
+			for(int j = 0; j <=6;j++)
+			{
+				System.out.print(x[i][j]);
+				System.out.print("\t");
+			}
+			System.out.println();
+		}
+	}
+/**
+ * @param month
+ * @param year
+ * @return return number of days present in month of given month and year
+ */
+public static int maxDays(int month,int year)
+{
+	int maxdays = 0;
+	if(month == 1 || month== 3 || month == 5 || month == 7 || month == 8 || month == 10 || month == 12)
+	{
+		maxdays = 31;
+	}
+	else if(month ==4 || month == 6 || month == 9 || month == 11)
+	{
+		maxdays = 30;
+	}
+	else
+	{
+		if(leap(year))
+		{
+			maxdays = 29;
+		}
+		else
+		{
+			maxdays = 28;
+		}
+	}
+	return maxdays;
+}
+/**
+ * @param month
+ * @param year
+ * print month calender with useing stack
+ */
+public static void calenderWithStack(int month,int year)
+{
+	Stack week = new Stack();
+	int start = Utility.dayOfMonthStarting(month, year);
+	int maxDay = Utility.maxDays(month, year);
+	int numberOfObject;
+	int date = 0;
+	if(maxDay + start>35)
+	{
+		numberOfObject = 6;
+	}
+	else
+	{
+		numberOfObject = 5;
+	}
+	for(int i = 0; i < numberOfObject;i++)
+	{
+		week.add(new Stack());
+	}
+	for(int i = 0; i < numberOfObject;i++)
+	{
+		Stack stack =week.dataAtPosition(i);
+		if(i==0)
+		{
+			for(int j = 0; j <start; j++)
+			{
+				stack.add(" ");
+			}
+			for(int j = start;j<7;j++)
+			{
+				stack.add(++date);
+			}
+		}
+		else
+		{
+			for(int j = 0; j <7;j++)
+			{
+				stack.add(++date);
+				if(date == maxDay)
+				{
+					break;
+				}
+			}	
+		}
+	}
+	System.out.println("SUN"+"\t"+"M"+"\t"+"TU"+"\t"+"WED"+"\t"+"TH"+"\t"+"FRI"+"\t"+"SAt");
+	for(int i = 0; i < numberOfObject; i++)
+	{
+		Stack stack =  week.dataAtPosition(i);
+		int length = stack.size();
+		for(int j = 0; j <length; j++)
+		{
+			
+			String s1 = stack.dataAtPosition(j).toString();
+			System.out.print(s1);
+			System.out.print("\t");
+		}
+		System.out.println();
+	}
+}
+/**
+ * @param start = starting number from where prime number is to found
+ * @param end = number till which prime number to be found
+ * @return arraylist containing prime number b/w start to end range
+ */
+public static ArrayList primeNumberInRange(int start, int end)
+{
+	ArrayList arrayList = new ArrayList();
+	for(int i = start;i<=end;i++)
+	{
+		if(prime(i))
+		{
+			arrayList.add(i);
+		}
+	}
+	return arrayList;
+}
+/**
+ * @param arrayList = refrence of arraylist which will be converted to 2d array
+ */
+public static void arraylistTo2DArray(ArrayList<Integer> arrayList)
+{
+	int slot = 100;
+	String[][] array = new String[10][25];
+	for(int i = 0; i <10; i++)
+	{
+		for(int j = 0; j < 25; j++)
+		{
+			array[i][j] = " ";
+		}
+	}
+	int row = 0;
+	int colum = 0;
+	for(int i = 0; i <arrayList.size();i++)
+	{
 		
-		
-
+		 int data = arrayList.get(i);
+		 if(data>slot)
+		 {
+			 slot +=100;
+			 row++;
+			 colum = 0;
+		 }
+		 array[row][colum++] = Integer.toString(data);
+	}
+	for(int i = 0; i <10; i++)
+	{
+		for(int j = 0; j <25;j++)
+		{
+			System.out.print(array[i][j] + "\t");
+		}
+		System.out.println();
+	}
+	
+}
+/**
+ * @param arrayList= refrence of arraylist storeing some data
+ * @return treeset haveing anagram
+ */
+public static TreeSet<Integer> anagramInArraylist(ArrayList<Integer> arrayList)
+{
+	TreeSet<Integer> treeSet = new TreeSet<>();
+	for(int i = 0; i < arrayList.size()-1;i++)
+	{
+		for(int j = i +1; j< arrayList.size();j++)
+		{
+			if(anagram(arrayList.get(i), arrayList.get(j)))
+			{
+				treeSet.add(arrayList.get(i));
+				treeSet.add(arrayList.get(j));
+			}
+		}
+	}
+	return treeSet;
+}
+/**
+ * @param treeSet refrence of tree set to be converted to 2d array
+ */
+public static void treesetTo2DArray(TreeSet<Integer> treeSet)
+{
+	int slot = 100;
+	Object[] array1 = treeSet.toArray();
+	String[][] array = new String[10][25];
+	for(int i = 0; i <10; i++)
+	{
+		for(int j = 0; j < 25; j++)
+		{
+			array[i][j] = " ";
+		}
+	}
+	int row = 0;
+	int colum = 0;
+	for(int i = 0; i <array1.length;i++)
+	{
+		 int data = (Integer)array1[i];
+		 if(data>slot)
+		 {
+			 slot +=100;
+			 row++;
+			 colum = 0;
+		 }
+		 array[row][colum++] = Integer.toString(data);
+	}
+	for(int i = 0; i <10; i++)
+	{
+		for(int j = 0; j <25;j++)
+		{
+			System.out.print(array[i][j] + "\t");
+		}
+		System.out.println();
+	}
+}
+/**
+ * @param node = number of node of binary search tree
+ * @return posible outcome for binary serach tree
+ */
+public static long binarySearchTree(int node)
+{
+	long sum=0;
+	if(node<=1)
+	{
+		return 1;
+	}
+	else
+	{
+		for(int i=1; i<=node; i++)
+		{
+			sum=sum+(binarySearchTree(i-1)*binarySearchTree(node-i));
+		}
+		return sum;
+	}
+}
 }

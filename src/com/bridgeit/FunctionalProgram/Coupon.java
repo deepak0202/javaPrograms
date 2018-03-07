@@ -1,8 +1,3 @@
-package com.bridgeit.FunctionalProgram;
-
-import java.util.HashSet;
-
-import com.bridgeit.Utility;
 /******************************************************************************
 *  Purpose:  generate Distinct Coupon Number and save it in hashset object
 
@@ -12,6 +7,13 @@ import com.bridgeit.Utility;
 *  @since   05-03-2018
 *
 ******************************************************************************/
+
+package com.bridgeit.FunctionalProgram;
+
+import java.util.HashSet;
+
+import com.bridgeit.utility.Utility;
+
 public class Coupon 
 {
 	public static void main(String[] args) 

@@ -1,7 +1,3 @@
-package com.bridgeit.Algorithm;
-
-import com.bridgeit.Utility;
-
 /******************************************************************************
 *  Purpose:  takes a date as input by command line arguments  and 
 *            prints the day of the week that date falls on
@@ -10,6 +6,12 @@ import com.bridgeit.Utility;
 *  @since   05-03-2018
 *
 ******************************************************************************/
+
+package com.bridgeit.Algorithm;
+
+import com.bridgeit.utility.Utility;
+
+
 public class DayOfWeek 
 {
 	public static void main(String[] args) 

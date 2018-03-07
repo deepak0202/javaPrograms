@@ -1,7 +1,3 @@
-package com.bridgeit.Algorithm;
-
-import com.bridgeit.Utility;
-
 /******************************************************************************
 *  Purpose: convert number into binary then swap it from center then convert new binary to number
 *  @author  Deepak Singh
@@ -9,6 +5,12 @@ import com.bridgeit.Utility;
 *  @since   05-03-2018
 *
 ******************************************************************************/
+
+package com.bridgeit.Algorithm;
+
+import com.bridgeit.utility.Utility;
+
+
 public class Binary 
 {
 	public static void main(String[] args) 

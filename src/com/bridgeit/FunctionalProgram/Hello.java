@@ -1,6 +1,3 @@
-package com.bridgeit.FunctionalProgram;
-
-import com.bridgeit.Utility;
 /******************************************************************************
 *  Purpose:  to check whether input string is more then three character
 *            if it is then print it with  msg 
@@ -11,6 +8,11 @@ import com.bridgeit.Utility;
 *  @since   05-03-2018
 *
 ******************************************************************************/
+
+package com.bridgeit.FunctionalProgram;
+
+import com.bridgeit.utility.Utility;
+
 class Hello
 {
   public static void main(String[] args)

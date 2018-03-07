@@ -1,9 +1,3 @@
-package com.bridgeit.Algorithm;
-
-import java.util.ArrayList;
-
-import com.bridgeit.Utility;
-
 /******************************************************************************
 *  Purpose: to print prime , palindrome and anagram number b/w 1 to 1000
 *  @author  Deepak Singh
@@ -11,6 +5,14 @@ import com.bridgeit.Utility;
 *  @since   05-03-2018
 *
 ******************************************************************************/
+
+package com.bridgeit.Algorithm;
+
+import java.util.ArrayList;
+
+import com.bridgeit.utility.Utility;
+
+
 public class PrimeAnagramPalindrome 
 {
 	public static void main(String[] args) 

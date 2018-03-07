@@ -1,8 +1,3 @@
-
-package com.bridgeit.Algorithm;
-
-import com.bridgeit.Utility;
-
 /******************************************************************************
 *  Purpose: take temperature in fahrenheit as input outputs the temperature in Celsius  or viceversa 
 *  @author  Deepak Singh
@@ -10,6 +5,12 @@ import com.bridgeit.Utility;
 *  @since   05-03-2018
 *
 ******************************************************************************/
+
+package com.bridgeit.Algorithm;
+
+import com.bridgeit.utility.Utility;
+
+
 public class TemperaturConversion 
 {
 	public static void main(String[] args)
