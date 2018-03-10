@@ -1,4 +1,4 @@
-package com.bridgeit.dataStructure;
+
 /******************************************************************************
 *  Purpose: represent a node of linkedlist and use to store integer data by call class constructor
 *  @author  Deepak Singh
@@ -6,6 +6,7 @@ package com.bridgeit.dataStructure;
 *  @since   07-03-2018
 *
 ******************************************************************************/
+package com.bridgeit.dataStructure;
 class Node1
 {
 	Node1 forwardRefrence;

@@ -2,6 +2,7 @@ package com.bridgeit.utility;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
@@ -9,11 +10,18 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Deque;
 import java.util.HashSet;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Queue;
 import java.util.Random;
 import java.util.Scanner;
 import java.util.TreeSet;
+
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.JSONParser;
+import org.json.simple.parser.ParseException;
 
 import com.bridgeit.dataStructure.LinkedList;
 import com.bridgeit.dataStructure.Linkedlist;
@@ -131,7 +139,7 @@ public class Utility
 	 * @param n = number of coupon user wants to genrate
 	 * print distinct coupon number
 	 */
-	public static HashSet coupon(int n)
+	public static HashSet<Integer> coupon(int n)
 	{
 		int y = 0;
 		Random r = new Random();
@@ -1430,9 +1438,9 @@ public static void calenderWithStack(int month,int year)
  * @param end = number till which prime number to be found
  * @return arraylist containing prime number b/w start to end range
  */
-public static ArrayList primeNumberInRange(int start, int end)
+public static ArrayList<Integer> primeNumberInRange(int start, int end)
 {
-	ArrayList arrayList = new ArrayList();
+	ArrayList<Integer> arrayList = new ArrayList<Integer>();
 	for(int i = start;i<=end;i++)
 	{
 		if(prime(i))
@@ -1557,4 +1565,253 @@ public static long binarySearchTree(int node)
 		return sum;
 	}
 }
+public static void writeInventoryJsonFile() throws FileNotFoundException
+{
+	Map m;
+	Utility utility = new Utility();
+	PrintWriter printWriter = new PrintWriter("inventory.json");
+	JSONObject jsonObject = new JSONObject();
+	JSONArray jsonArrayOfRice = new JSONArray();
+	JSONArray jsonArrayOfPulse = new JSONArray();
+	JSONArray jsonArrayOfWheat = new JSONArray();
+	
+	System.out.println("enter number of rice varity you want to enter in inventory");
+	int numberOfrice = utility.inputInteger();
+	
+	for(int i = 1; i <= numberOfrice; i++)
+	{
+		m = new LinkedHashMap<>();
+		System.out.println("enter the name of rice of " + i);
+		String riceName = utility.inputString();
+		System.out.println("enter weight of rice of" + i);
+		double weight = utility.inputDouble();
+		System.out.println("enter the price of rice of " + i);
+		double price = utility.inputDouble();
+		m.put("name", riceName);
+		m.put("weight", weight);
+		m.put("price", price);
+		jsonArrayOfRice.add(m);
+	}
+	
+	System.out.println("enter number of pulse varity you want to enter in inventory");
+	int numberOfPulse = utility.inputInteger();
+	
+	for(int i = 1; i<=numberOfPulse;i++)
+	{
+		m = new LinkedHashMap<>();
+		System.out.println("enter the name of pulse of " + i);
+		String pulseName = utility.inputString();
+		System.out.println("enter the weight of pulse of " + i);
+		double weight = utility.inputDouble();
+		System.out.println("enter the price of pulse of " + i);
+		double price = utility.inputDouble();
+		m.put("name", pulseName);
+		m.put("weight", weight);
+		m.put("price", price);
+		jsonArrayOfPulse.add(m);
+	}
+	
+	System.out.println("enter number of wheat varity you want to enter in inventory");
+	int numberOfWheat = utility.inputInteger();
+	
+	for(int i = 1; i<=numberOfWheat; i++)
+	{
+		m = new LinkedHashMap<>();
+		System.out.println("enter the name of wheat of " + i);
+		String wheatName = utility.inputString();
+		System.out.println("enter the weight of wheat of " + i);
+		double weight = utility.inputDouble();
+		System.out.println("enter the price of wheat of " + i);
+		double price = utility.inputDouble();
+		m.put("name", wheatName);
+		m.put("weight", weight);
+		m.put("price", price);
+		jsonArrayOfWheat.add(m);
+	}
+	
+	jsonObject.put("rice", jsonArrayOfRice);
+	jsonObject.put("pulse", jsonArrayOfPulse);
+	jsonObject.put("wheat", jsonArrayOfWheat);
+	
+	printWriter.write(jsonObject.toJSONString());
+	printWriter.flush();
+	printWriter.close();
+	
+}
+public static JSONObject readFromJsonFile(String filename) throws FileNotFoundException, IOException, ParseException
+{
+	Object obj = new JSONParser().parse(new FileReader(filename));
+    JSONObject jo = (JSONObject) obj;
+    return jo;
+}
+public static void inventoryData(JSONObject jsonObject)
+{
+	JSONArray rice = (JSONArray) jsonObject.get("rice");
+	JSONArray wheat = (JSONArray) jsonObject.get("wheat");
+	JSONArray pulse = (JSONArray) jsonObject.get("pulse");
+	
+	for(int i = 0; i <rice.size();i++)
+	{
+	Map m = (Map) rice.get(i);
+	String name = (String) m.get("name");
+	double weight = (double) m.get("weight");
+	double price = (double) m.get("price");
+	double sum = weight * price;
+	System.out.println("total price for rice of varity " + name + " is " + sum);
+	}
+	System.out.println();
+	
+	for(int i = 0; i < wheat.size();i++)
+	{
+		Map m = (Map) wheat.get(i);
+		String name = (String) m.get("name");
+		double wieght = (double) m.get("weight");
+		double price = (double) m.get("price");
+		double sum = wieght * price;
+		System.out.println("total price for wheat of varity " + name + " is " + sum);
+	}
+	System.out.println();
+	
+	for(int i = 0; i < pulse.size();i++)
+	{
+		Map m = (Map) pulse.get(i);
+		String name = (String) m.get("name");
+		double wieght = (double) m.get("weight");
+		double price = (double) m.get("price");
+		double sum = wieght * price;
+		System.out.println("total price for pulse of varity " + name + " is " + sum);
+	}
+}
+public static void writeStockJsonFile() throws IOException, ParseException
+{
+	Map m;
+	Utility utility = new Utility();
+	JSONArray jsonArray = new JSONArray();
+	JSONObject jsonObject = new JSONObject();
+	
+	System.out.println("enter the number of stock you want to enter");
+	int numberOfStock = utility.inputInteger();
+	
+	File file = new File("stock.json");
+	if(file.length()==0)
+	{
+	for(int i = 1; i <= numberOfStock; i++)
+	{
+		System.out.println("enter the stock name of " + i);
+		String name = utility.inputString();
+		System.out.println("enter the number of share of " + name);
+		double numberOfShare = utility.inputDouble();
+		System.out.println("enter the price of " + name);
+		double price = utility.inputDouble();
+		m = new LinkedHashMap<>();
+		m.put("name", name);
+		m.put("numberOfShare", numberOfShare);
+		m.put("price", price);
+		jsonArray.add(m);
+	}
+	
+	jsonObject.put("stock", jsonArray);
+	
+	}
+	else
+	{
+		boolean present = false;
+		int index = 0;
+		JSONObject jsonObject1 = readFromJsonFile("stock.json");
+		JSONArray jsonArray2 = (JSONArray) jsonObject1.get("stock");
+		
+		for(int k = 1; k <= numberOfStock; k++)
+		{
+			System.out.println("enter the stock name of ");
+			String name = utility.inputString();
+			System.out.println("enter the number of share of " + name);
+			double numberOfShare = utility.inputDouble();
+			System.out.println("enter the price of " + name);
+			double price = utility.inputDouble();
+			
+			for(int i = 0; i < jsonArray2.size();i++)
+			{
+				m = (Map) jsonArray2.get(i);
+				if(m.containsValue(name))
+				{
+					present = true;		
+					index = i;
+					break;
+				}
+			}
+			m = new LinkedHashMap<>();
+			m.put("name", name);
+			m.put("numberOfShare", numberOfShare);
+			m.put("price", price);
+			if(present)
+			{
+				jsonArray2.set(index, m);
+				present = false;
+			}
+			else
+			{
+				jsonArray2.add(m);
+			}
+		}
+		jsonObject.put("stock", jsonArray2);
+	}
+	
+	PrintWriter printWriter = new PrintWriter("stock.json");
+	printWriter.write(jsonObject.toJSONString());
+	printWriter.flush();
+	printWriter.close();		
+}
+public static void readStockJsonFile() throws FileNotFoundException, IOException, ParseException
+{
+	Map m;
+	double stockTotalPrice = 0;
+	 JSONObject jsonObject = readFromJsonFile("stock.json");
+	 JSONArray jsonArray = (JSONArray) jsonObject.get("stock");
+	 System.out.println("stockName" + "\t" + "Numberofshare" + "\t" + "priceofshare" + "\t" + "total price");
+	 for(int i = 0; i< jsonArray.size();i++)
+	 {
+		 m =(Map) jsonArray.get(i);
+		 String stockName = (String) m.get("name");
+		 int numberOfShare = (int)(double) m.get("numberOfShare");
+		 double price = (double) m.get("price");
+		 double sharePriceTotal = ((double)numberOfShare) * price;
+		 System.out.println(stockName +"\t"+"\t" +"\t"+ numberOfShare +"\t" + price + "\t"+"\t" + sharePriceTotal);
+		 stockTotalPrice += sharePriceTotal;
+	 }
+	 System.out.println("------------------------------------");
+	 System.out.println("value of total stock : " + stockTotalPrice);
+}
+
+public static void printJsonObjectToFile(String fileName, JSONObject jsonObject) throws FileNotFoundException
+{
+	PrintWriter printWriter = new PrintWriter(fileName);
+	printWriter.write(jsonObject.toJSONString());
+	printWriter.flush();
+	printWriter.close();
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }

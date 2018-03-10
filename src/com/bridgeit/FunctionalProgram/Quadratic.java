@@ -8,8 +8,6 @@
 
 package com.bridgeit.FunctionalProgram;
 
-import java.util.Scanner;
-
 import com.bridgeit.utility.Utility;
 
 

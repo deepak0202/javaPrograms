@@ -15,7 +15,7 @@ import com.bridgeit.utility.Utility;
 
 public class Vending 
 {
-	static HashSet h = new HashSet();
+	static HashSet<Integer> h = new HashSet<Integer>();
 	static int count;
 	public static void main(String[] args) 
 	{

@@ -11,7 +11,6 @@
 package com.bridgeit.FunctionalProgram;
 
 import java.util.HashSet;
-
 import com.bridgeit.utility.Utility;
 
 public class Coupon 
@@ -21,7 +20,7 @@ public class Coupon
 		Utility utility = new Utility();
 		System.out.println("enter the number of coupon to be genrated");
 		int numberOfCoupon = utility.inputInteger();
-		HashSet hashSet = Utility.coupon(numberOfCoupon);
+		HashSet<Integer> hashSet = Utility.coupon(numberOfCoupon);
 		System.out.println(hashSet);
 	}
 }

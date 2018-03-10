@@ -12,22 +12,16 @@ package com.bridgeit.FunctionalProgram;
 
 import com.bridgeit.utility.Utility;
 
-class Leap
-{
-  public static void main(String[] args)
-{
-Utility utility = new Utility();
-System.out.println("enter the year");
-int year = utility.inputInteger();
-boolean leap = Utility.leap(year);
-if(leap)
-{
-	System.out.println("it is leap year");
+class Leap {
+	public static void main(String[] args) {
+		Utility utility = new Utility();
+		System.out.println("enter the year");
+		int year = utility.inputInteger();
+		boolean leap = Utility.leap(year);
+		if (leap) {
+			System.out.println("it is leap year");
+		} else {
+			System.out.println("not a leap year");
+		}
+	}
 }
-else
-{
-	System.out.println("not a leap year");
-}
-}
-}
-

@@ -13,16 +13,11 @@ package com.bridgeit.FunctionalProgram;
 
 import com.bridgeit.utility.Utility;
 
-class Hello
-{
-  public static void main(String[] args)
-{
-	  Utility utility = new Utility();
-System.out.println("enter the string");
-String s = utility.inputString();
-Utility.hello(s);
+class Hello {
+	public static void main(String[] args) {
+		Utility utility = new Utility();
+		System.out.println("enter the string");
+		String s = utility.inputString();
+		Utility.hello(s);
+	}
 }
-}
-
-
-

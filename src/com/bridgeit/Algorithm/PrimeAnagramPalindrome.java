@@ -17,7 +17,7 @@ public class PrimeAnagramPalindrome
 {
 	public static void main(String[] args) 
 	{
-		ArrayList<Integer> al = new ArrayList();
+		ArrayList<Integer> al = new ArrayList<Integer>();
 		for(int i=0; i<=1000;i++)
 		{
 			if(Utility.prime(i) && Utility.Palindrome(i))

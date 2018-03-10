@@ -26,24 +26,18 @@ public class CalenderWithQueue
 		int maxDay = Utility.maxDays(month, year);
 		int numberOfObject;
 		int date = 0;
-		if(maxDay + start>35)
-		{
+		if (maxDay + start > 35) {
 			numberOfObject = 6;
-		}
-		else
-		{
+		} else {
 			numberOfObject = 5;
 		}
-		for(int i = 0; i < numberOfObject;i++)
-		{
+		for (int i = 0; i < numberOfObject; i++) {
 			week.add(new LinkedList<>());
 		}
-		for(int i = 0; i < numberOfObject;i++)
-		{
-			Queue queue =(Queue) week.poll();
-			if(i==0)
-			{
-				for(int j = 0; j <start; j++)
+		for (int i = 0; i < numberOfObject; i++) {
+			Queue queue = (Queue) week.poll();
+			if (i == 0) {
+				for (int j = 0; j < start; j++)
 				{
 					queue.add(" ");
 				}

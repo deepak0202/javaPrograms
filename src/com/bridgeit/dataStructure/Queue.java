@@ -1,4 +1,4 @@
-package com.bridgeit.dataStructure;
+
 /******************************************************************************
 *  Purpose: to store data of person useing its constructor
 *  the first dimension represents the range 0-100, 100-200, and so on.
@@ -7,6 +7,7 @@ package com.bridgeit.dataStructure;
 *  @since   07-03-2018
 *
 ******************************************************************************/
+package com.bridgeit.dataStructure;
 class Person
 {
 	String Name;
