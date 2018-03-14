@@ -9,7 +9,7 @@
 
 package com.bridgeit.dataStructure;
 
-public class Queue1 
+public class Queue1<T> 
 {
 	Node firstNode;
 	Node lastNode;
@@ -137,11 +137,8 @@ public class Queue1
 			current = current.forwardRefrence;
 		}
 		prev.forwardRefrence = null;
-			}
-		
-		
+			}	
 	}
-
 	 void deletefirst()
 	 {
 		 firstNode = firstNode.forwardRefrence;
@@ -167,5 +164,4 @@ public class Queue1
 			 return false;
 		 }
 	 }	
-
 }

@@ -8,8 +8,8 @@ import java.util.Map;
 public class test 
 {
 	public static void main(String[] args) throws IOException {
-		File f = new File("share.json");
-	//	f.createNewFile();
+	    File f = new File("appointment.json");
+		f.createNewFile();
 		//System.out.println(f.length());
 		
 	//	long l = (long) 3.1;
@@ -29,7 +29,15 @@ public class test
 //			System.out.println("dome1");
 //		}
 ////		
-		System.out.println(1405 % 500);
-	}
+//		System.out.println(1405 % 500);
+		
+		
+		
+//		
+//		String s1 = "deepak";
+//		String s2 = "akash";
+//		int i = s1.in
 
 }
+}
+

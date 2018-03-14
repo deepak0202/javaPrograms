@@ -3,6 +3,8 @@ package com.bridgeit.objectOrientedPrograms;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
@@ -16,13 +18,19 @@ public class StockAccount
 {
 	public static void main(String[] args) throws FileNotFoundException, IOException, ParseException 
 	{
-		Utility utility = new Utility();
-//		System.out.println("enter your choise");
-//		System.out.println("enter 1 to create stockAount");
-		//System.out.println("enter 2 to buy share");
 		
+		Utility utility = new Utility();
+		int start;
+		do
+		{
 		System.out.println("enter your choise");
+        System.out.println("enter 1 to create stockAount");
+		System.out.println("enter 2 to buy share");
+		System.out.println("enter 3 to sell share");
+		System.out.println("enter 4 to print report");
+		System.out.println("enter 5 to exist");
 		int choise = utility.inputInteger();
+		start = choise;
 		switch (choise) 
 		{
 		case 1:
@@ -63,6 +71,7 @@ public class StockAccount
 					jsonObjectStock.put("user", jsonArrayuser);
 					
 					Utility.printJsonObjectToFile("stockAccount.json", jsonObjectStock);
+					printDate();
 					
 					
 				}
@@ -71,12 +80,51 @@ public class StockAccount
 					System.out.println("stock not exist");
 					
 				}
+				break;
+			case 3 :
+				boolean present3 = false;
+				int index3 = 0;
+				Map userMap3 = new LinkedHashMap<>();
+				System.out.println("enter stock name for which you want to sell share");
+				String stockName3 = utility.inputString();
+				JSONObject jsonObjectuser3 = Utility.readFromJsonFile("stockAccount.json");
+				JSONArray jsonArrayuser3 = (JSONArray) jsonObjectuser3.get("user");
+				for(int i = 0; i < jsonArrayuser3.size();i++)
+				{
+					userMap3 = (Map) jsonArrayuser3.get(i);
+					if(userMap3.containsValue(stockName3))
+					{
+						index3 = i;
+						present3 = true;
+						break;
+					}
+				}
+				if(present3)
+				{
+				Map newUserMap =	sell(userMap3);
+				jsonArrayuser3.set(index3, newUserMap);
+				JSONObject jsonObjectnew = new JSONObject();
+				jsonObjectnew.put("user", jsonArrayuser3);
+				Utility.printJsonObjectToFile("stockAccount.json", jsonObjectnew);
 				
+					printDate();
+				}
+				else
+				{
+					System.out.println("stock not exist");
+				}
+				break;
+			case 4:
+				printReport();
+				printDate();
+				break;
 				
 
 		default:
 			break;
 		}
+		}
+		while(start < 5);
 		
 		
 	}
@@ -116,91 +164,8 @@ public class StockAccount
 		printWriter.write(jsonObject.toJSONString());
 		printWriter.flush();
 		printWriter.close();
+		printDate();
 	}
-//	public static void buy(int useramountEnter,String symbol,Map user) throws FileNotFoundException, IOException, ParseException
-//	{
-//		Utility utility = new Utility();
-//		int index = 0;
-//		boolean present = false;
-//		Map m = new LinkedHashMap<>();
-//		JSONObject jsonObject = Utility.readFromJsonFile("share.json");
-//		JSONArray jsonArray = (JSONArray) jsonObject.get("share");
-//		
-//		for(int i =0; i<jsonArray.size();i++)
-//		{
-//			m = (Map) jsonArray.get(i);
-//			if(m.containsValue(symbol))
-//			{
-//				index = i;
-//				present = true;
-//				break;
-//			}
-//		}
-//		
-//		if(present)
-//		{
-//			//share detail
-//			long numberOfShareAvalable =  (long) m.get("numberOfShare");
-//			int shareprice = (int)(Integer) m.get("price");
-//			int shareCompanyTotalAmount = (int)(Integer) m.get("amount");
-//			
-//			//transection detail
-//			int numberOfShareHeWantsToBuy = useramountEnter / shareprice;
-//			
-//			//user detail
-//			int numberOfUserShareOfSymbol = (int)(Integer) user.get(symbol);
-//			double amounOfuser = (double) (Double)user.get("amount");
-//			
-//			
-//			if(amounOfuser>=useramountEnter)
-//			{
-//				if(numberOfShareAvalable>=numberOfShareHeWantsToBuy)
-//				{
-//					//new user detail
-//					int newShareofuser = numberOfUserShareOfSymbol + numberOfShareHeWantsToBuy;
-//					double newAmountOfUser = amounOfuser - (double)useramountEnter;
-//					
-//					//new share detail
-//					int newShareOfcompany = (int) (numberOfShareAvalable - numberOfShareHeWantsToBuy);
-//					int newAmountOfShare = shareCompanyTotalAmount + useramountEnter;
-//					
-//					//user map update 
-//					user.put(symbol,newShareofuser);
-//					user.put("amount", newAmountOfUser);
-//					
-//					//user array update
-////					jsonArray.set(index, m);
-////					JSONObject jsonObject2 = new JSONObject();
-////					jsonObject2.put("user", jsonArray);
-////					Utility.printJsonObjectToFile("stockAccount", jsonObject2);
-//					
-//					//share map update
-//					m.put("numberOfShare", newShareOfcompany);
-//					m.put("amount", newAmountOfShare);
-//					jsonArray.set(index, user);
-// 					JSONObject jsonObject2 = new JSONObject();
-//					jsonObject2.put("share", jsonArray);
-//					Utility.printJsonObjectToFile("share.json", jsonObject2);
-//					
-//				}
-//				else
-//				{
-//					System.out.println("company dont have that much share you reqied");
-//				}
-//			}
-//			else
-//			{
-//				System.out.println("insufficient fund");
-//			}
-//			
-//			
-//		}
-//		else
-//		{
-//			System.out.println("share symbol you have entered is not available for sale");
-//		}
-//		
-//	}
 	public static Map buy(double useramountEnter,String symbol,Map stockMap) throws FileNotFoundException, IOException, ParseException
 	{
 		boolean present = false;
@@ -221,30 +186,26 @@ public class StockAccount
 		}
 		if(present)
 		{
-			//stock details
 			int numberOfShareOfSymbol = 0;
 			if(stockMap.get(symbol)!= null)
 			{
 			String numberOfShareOfSymbolString = (String) stockMap.get(symbol);
 			numberOfShareOfSymbol = Integer.parseInt(numberOfShareOfSymbolString);
 			}
-		//	 numberOfShareOfSymbol = (int)(Integer) stockMap.get(symbol);
+
 			String totalShareOfStockString = (String) stockMap.get("totalShare");
 			int totalshareOfStock = Integer.parseInt(totalShareOfStockString);
 			String amountOfStockString = (String) stockMap.get("amount");
 			double amountOfStock = Double.parseDouble(amountOfStockString);
 			
-			//shARE detaials in string
 			String shareAmountString = (String) shareMap.get("amount");
 			String shareNumberString = (String) shareMap.get("numberOfShare");
 			String sharePriceString = (String) shareMap.get("price");
 			
-			//share detail converted
 			double shareTotalAmount = Double.parseDouble(shareAmountString);
 			int numberOfShare = Integer.parseInt(shareNumberString);
 			double sharePrice = Double.parseDouble(sharePriceString);
 			
-			//transection amount
 			double amountOfTransection;
 			if(useramountEnter% sharePrice == 0)
 			{
@@ -260,35 +221,28 @@ public class StockAccount
 			{
 				if(numberOfShare>=numberOfShareToBuy)
 				{
-					//transection start
-					//stock
 					double newStockAmount = amountOfStock - amountOfTransection;
 					int newShareOfStock = totalshareOfStock + numberOfShareToBuy;
 					int newShareOfSymbol = numberOfShareOfSymbol + numberOfShareToBuy;
 					
-					//share 
+					 
 					double newShareAmount = shareTotalAmount + amountOfTransection;
 					int newNumberOfshare = numberOfShare - numberOfShareToBuy;
 				
-					// share atribute in string
 					String newShareAmountString = Double.toString(newShareAmount);
 					String newNumberOfShareString = Integer.toString(newNumberOfshare);
-					
-					
-					
+										
 					JSONObject jsonObjectShare = new JSONObject();
 					shareMap.put("amount",newShareAmountString);
 					shareMap.put("numberOfShare", newNumberOfShareString);
 					jsonArrayShare.set(index, shareMap);
 					jsonObjectShare.put("share", jsonArrayShare);
 					Utility.printJsonObjectToFile("share.json", jsonObjectShare);
-					
-					//stock seting attribute  in string
+
 					String newStockAmountString = Double.toString(newStockAmount);
 					String newShareOfStockString = Integer.toString(newShareOfStock);
 					String newShareOfSymbolString = Integer.toString(newShareOfSymbol);
 					
-					//put stock in map
 					stockMap.put("amount", newStockAmountString);
 					stockMap.put("totalShare", newShareOfStockString);
 					stockMap.put(symbol, newShareOfSymbolString);
@@ -308,9 +262,104 @@ public class StockAccount
 		{
 			System.out.println("share not avalable for sale");
 		}
-
-		
 		return stockMap;
 	}
-
+	public static Map sell(Map stockMap) throws FileNotFoundException, IOException, ParseException
+	{
+		Utility utility = new Utility();
+		boolean present = false;
+		int index=0;
+		Map shareMap = new LinkedHashMap<>();
+		JSONObject jsonObject = Utility.readFromJsonFile("share.json");
+		JSONArray jsonArrayShare = (JSONArray) jsonObject.get("share");
+		System.out.println("enter share symbol which you want to sell");
+		String symbol = utility.inputString();
+		System.out.println("enter number share you want to sell");
+		int numberOfShareToBeSell = utility.inputInteger();
+		
+		for(int i = 0; i < jsonArrayShare.size();i++ )
+		{
+			shareMap = (Map) jsonArrayShare.get(i);
+			if(shareMap.containsValue(symbol))
+			{
+				index = i;
+				present = true;
+				break;
+			}
+		}
+		if(present)
+		{
+			String numberOfShareOfSymbolString = (String) stockMap.get(symbol);
+			String totalNumberOfShareOfStockString = (String) stockMap.get("totalShare");
+			String amountOfStockString = (String) stockMap.get("amount");
+			
+			String totalShareOfCompanyString = (String) shareMap.get("numberOfShare");
+			String amountOfCompanyString = (String) shareMap.get("amount");
+			String sharePriceString = (String) shareMap.get("price");
+			
+			int numberOfShareOfSymbol = Integer.parseInt(numberOfShareOfSymbolString);
+			int totalNumberOfShareOfStock = Integer.parseInt(totalNumberOfShareOfStockString);
+			double amountOfStock = Double.parseDouble(amountOfStockString);
+			 
+			int totalShareOfCompany = Integer.parseInt(totalShareOfCompanyString);
+			double amountOfCompany = Double.parseDouble(amountOfCompanyString);
+			double priceOfShare = Double.parseDouble(sharePriceString);
+					
+			if(numberOfShareToBeSell<=numberOfShareOfSymbol)
+			{ 
+				int newNumberOfShareOfSysmbol = numberOfShareOfSymbol - numberOfShareToBeSell;
+				double transectionAmount = priceOfShare *(double) numberOfShareToBeSell;
+				double newAmountOfStock = amountOfStock + transectionAmount;
+				int newTotalNumberOfShareOfStock = totalNumberOfShareOfStock - numberOfShareToBeSell;
+				
+				int newTotalshareOfCompany = totalShareOfCompany + numberOfShareToBeSell;
+				double newAmountOfCompany = amountOfCompany - transectionAmount;
+				
+				String newNumberOfShareOfSymbolString = Integer.toString(newNumberOfShareOfSysmbol);
+				String newAmountOfStockString = Double.toString(newAmountOfStock);
+				String newTotalNumberOfShareOfStockString = Integer.toString(newTotalNumberOfShareOfStock);
+				
+				String newTotalShareOfCompanyString = Integer.toString(newTotalshareOfCompany);
+				String newAmountOfCompanyString = Double.toString(newAmountOfCompany);
+				
+				stockMap.put(symbol, newNumberOfShareOfSymbolString);
+				stockMap.put("amount", newAmountOfStockString);
+				stockMap.put("totalShare", newTotalNumberOfShareOfStockString);
+				
+				shareMap.put("numberOfShare", newTotalShareOfCompanyString);
+				shareMap.put("amount", newAmountOfCompanyString);
+				
+				jsonArrayShare.set(index, shareMap);
+				JSONObject newjsonObjectShare = new JSONObject();
+				newjsonObjectShare.put("share", jsonArrayShare);
+				
+				Utility.printJsonObjectToFile("share.json", newjsonObjectShare);	
+			}
+			else
+			{
+				System.out.println("you dont have that much share to sell");
+			}	
+		}
+		else
+		{
+			System.out.println("company not present to purches that share");
+		}	
+		return stockMap;
+	}
+	public static void printReport() throws FileNotFoundException, IOException, ParseException
+	{
+		JSONObject jsonObjectstock = Utility.readFromJsonFile("stockAccount.json");
+		JSONArray jsonArray = (JSONArray) jsonObjectstock.get("user");
+		for(int i = 0; i < jsonArray.size();i++)
+		{
+			Map stockMap = (Map) jsonArray.get(i);
+			System.out.println(stockMap);	
+		}
+	}
+	public static void printDate()
+	{
+		Date date = new Date();
+		String d = new SimpleDateFormat("E yyyy.MM.dd at hh:mm:ss a").format(date);
+		System.out.print("date" + d);
+	}
 }
