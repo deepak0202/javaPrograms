@@ -7,17 +7,28 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.Date;
 import java.util.Deque;
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 import java.util.Queue;
 import java.util.Random;
 import java.util.Scanner;
+import java.util.Set;
 import java.util.TreeSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
+import javax.swing.SwingConstants;
 import javax.swing.plaf.synth.SynthSeparatorUI;
 
 import org.json.simple.JSONArray;
@@ -27,11 +38,14 @@ import org.json.simple.parser.ParseException;
 
 import com.bridgeit.dataStructure.LinkedList;
 import com.bridgeit.dataStructure.Linkedlist;
-import com.bridgeit.dataStructure.Stack;;
+import com.bridgeit.dataStructure.Stack;
+import com.bridgeit.objectOrientedPrograms.PredefineData;
+import com.bridgeit.objectOrientedPrograms.UserDetails;;
 
 public class Utility 
 {
 	public static Scanner scanner;
+	
 	
 	 
 	 
@@ -2333,6 +2347,7 @@ public static void serachAndbookdoctor(JSONObject pateint) throws FileNotFoundEx
 		break;
 	case 3:
 		System.out.println("enter the specilization of doctor");
+		serachDoctorBySpecialization(utility.inputString(), pateint);
 		break;
 
 	default:
@@ -2520,4 +2535,277 @@ static void checkavalbilityOfdocterbyId(String id,JSONObject patient) throws Fil
 		}
 	}
 }
+public static void searchPatient() throws FileNotFoundException, IOException, ParseException
+{
+	ArrayList<JSONObject> arrayListPatient = new ArrayList<>();
+	boolean patientPresent = false;
+	JSONObject jsonObjectpatient = readFromJsonFile("patients.json");
+	JSONArray jsonArraypatient = (JSONArray) jsonObjectpatient.get("patients");
+	Utility utility = new Utility();
+	JSONObject patient = null;
+	System.out.println("enter 1 to serch patient by name");
+	System.out.println("enter 2 to serch patient by id");
+	System.out.println("enter 3 to serach patient by mobil number");
+	int choise = utility.inputInteger();
+	switch (choise) {
+	case 1:
+		System.out.println("enter the patient name");
+		String name = utility.inputString();
+		for(int i = 0; i < jsonArraypatient.size();i++)
+		{
+			patient = (JSONObject) jsonArraypatient.get(i);
+			String patientName = (String) patient.get("name");
+			if(name.equals(patientName))
+			{
+				patientPresent = true;
+				arrayListPatient.add(patient);
+			}
+		}
+		if(patientPresent)
+		{
+			System.out.println("patient of name " + name);
+			for(int i =0; i < arrayListPatient.size();i++)
+			{
+				System.out.println(arrayListPatient.get(i));
+			}
+		}
+		else
+		{
+			System.out.println("patient with name = "+name+"dont exist" );
+		}
+		break;
+	case 2:
+		System.out.println("enter the patient id");
+		String id = utility.inputString();
+		for(int i = 0; i < jsonArraypatient.size();i++)
+		{
+			patient = (JSONObject)  jsonArraypatient.get(i);
+			String patientid = (String) patient.get("id");
+			if(id.equals(patientid))
+			{
+				patientPresent = true;
+				break;
+			}
+		}
+		if(patientPresent)
+		{
+			System.out.println(patient);
+		}
+		else
+		{
+			System.out.println("patient with id = "+id + "not exist");
+		}
+		break;
+	case 3:
+		System.out.println("enter the patient mobil number");
+		String mobilNumber = utility.inputString();
+		for(int i = 0;i<jsonArraypatient.size();i++)
+		{
+			patient = (JSONObject) jsonArraypatient.get(i);
+			String patientMobilNumber = (String) patient.get("mobilNumber");
+			if(mobilNumber.equals(patientMobilNumber))
+			{
+				patientPresent = true;
+				arrayListPatient.add(patient);
+			}
+		}
+		if(patientPresent)
+		{
+			for(int i = 0; i < arrayListPatient.size();i++)
+			{
+				System.out.println(arrayListPatient.get(i));
+			}
+		}
+		else
+		{
+			System.out.println("patient with mobil number = " + mobilNumber + "not present");
+		}
+	default:
+		break;
+	}
 }
+public static void bestDoctor() throws FileNotFoundException, IOException, ParseException
+{
+	HashMap<String, Integer> doctorsPatientCount = new HashMap<>();
+	JSONObject jsonObjectappointment = readFromJsonFile("appointment.json");
+	Set keyOfappointment = jsonObjectappointment.keySet();
+	Iterator iter = keyOfappointment.iterator();
+	while(iter.hasNext())
+	{
+		int countOfPatient = 0;
+		String idOfDoctor = (String) iter.next();
+		JSONObject jsonObjectOfId = (JSONObject) jsonObjectappointment.get(idOfDoctor);
+		if(jsonObjectOfId.isEmpty())
+		{
+			countOfPatient = 0;
+		}
+		else
+		{
+			Set keyOfDate = jsonObjectOfId.keySet();
+			Iterator iter1 = keyOfDate.iterator();
+			while(iter1.hasNext())
+			{
+				String date = (String) iter1.next();
+				JSONArray jsonArrayDate = (JSONArray) jsonObjectOfId.get(date);
+				countOfPatient +=jsonArrayDate.size();
+			}
+		}
+		doctorsPatientCount.put(idOfDoctor, countOfPatient);
+	}
+	
+	String maxKey = "";
+	 int maxValueInMap=(Collections.max(doctorsPatientCount.values()));
+	 for (Entry<String, Integer> entry : doctorsPatientCount.entrySet()) 
+	 {
+         if (entry.getValue()==maxValueInMap) 
+         {
+        	 maxKey = entry.getKey();
+         }
+	 }
+	 JSONObject bestdoctoerDetails = getDocterDetailsById(maxKey);
+	 System.out.println("best doctor of clinice details");
+	 System.out.println(bestdoctoerDetails);
+}
+public static JSONObject getDocterDetailsById(String doctorId) throws FileNotFoundException, IOException, ParseException
+{
+	JSONObject doctor = null;
+	JSONObject jsonObjectDoctor = readFromJsonFile("doctor.json");
+	JSONArray jsonArrayDoctor = (JSONArray) jsonObjectDoctor.get("doctor");
+	for(int i = 0; i < jsonArrayDoctor.size();i++)
+	{
+	    doctor = (JSONObject) jsonArrayDoctor.get(i);
+		String id = (String) doctor.get("id");
+		if(id.equals(doctorId))
+		{
+			return doctor;
+		}	
+	}
+	return null;
+}
+public static void doctorPatientList() throws FileNotFoundException, IOException, ParseException
+{
+	JSONObject jsonObjectappointment = readFromJsonFile("appointment.json");
+	Set keyOfappointment = jsonObjectappointment.keySet();
+	Iterator iter = keyOfappointment.iterator();
+	while(iter.hasNext())
+	{
+		String idOfDoctor = (String) iter.next();
+		System.out.println("doctor details");
+		System.out.println(getDocterDetailsById(idOfDoctor));
+		System.out.println("------------------------------");
+		System.out.println("patient details");
+		JSONObject jsonObjectOfId = (JSONObject) jsonObjectappointment.get(idOfDoctor);
+		if(jsonObjectOfId.isEmpty())
+		{
+			System.out.println("have no patient associated with them");
+			
+		}
+		else
+		{
+			Set keyOfDate = jsonObjectOfId.keySet();
+			Iterator iter1 = keyOfDate.iterator();
+			
+			System.out.println("have following patient associated to it");
+			while(iter1.hasNext())
+			{
+				String date = (String) iter1.next();
+				JSONArray jsonArrayDate = (JSONArray) jsonObjectOfId.get(date);
+				for(int i = 0; i < jsonArrayDate.size();i++)
+				{
+					System.out.println(jsonArrayDate.get(i));
+				}
+			}
+		}
+		System.out.println();
+		System.out.println();
+		System.out.println("==============================");
+	}
+}
+public String getFormatedDate(Date date)
+{
+	SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
+	return sdf.format(date);
+}
+
+public String convertString(UserDetails userDetails,String message)
+{
+	Pattern p = Pattern.compile(PredefineData.NAME);
+   		Matcher m = p.matcher(message); 
+   		message = m.replaceAll(userDetails.getFirstName());
+
+	p = Pattern.compile(PredefineData.FULLNAME);
+	m = p.matcher(message); 
+	message = m.replaceAll(userDetails.getFirstName()+" "+userDetails.getLastName());
+
+	p = Pattern.compile(PredefineData.MOBILE_NO);
+	m = p.matcher(message); 
+	message = m.replaceAll(userDetails.getMobileNo());
+
+	p = Pattern.compile(PredefineData.DATE);
+	m = p.matcher(message); 
+	message = m.replaceAll(userDetails.getDate());
+
+	return message;
+}
+public String getFileText(String fileName){
+	BufferedReader br=null;
+	try{
+
+		br = new BufferedReader(new FileReader(fileName));
+		StringBuilder sb=new StringBuilder();
+		String line=br.readLine();
+		while(line!=null){
+			sb.append(line);
+			sb.append(System.lineSeparator());
+			line=br.readLine();
+		}
+		return sb.toString();
+	 }
+	catch(Exception exception){
+		return null;
+	}
+	finally {
+		try {
+			br.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+}
+
+public static java.util.LinkedList<JSONObject> addCompanytoList() throws FileNotFoundException, IOException, ParseException
+{
+	JSONObject jsonObjectshare = readFromJsonFile("share.json");
+	JSONArray jsonArrayShare = (JSONArray) jsonObjectshare.get("share");
+	java.util.LinkedList<JSONObject> linkedList = new java.util.LinkedList<>();
+	for(int i = 0; i < jsonArrayShare.size();i++)
+	{
+		linkedList.add((JSONObject) jsonArrayShare.get(i));
+	}
+	return linkedList;
+}
+public static void addShareCompany() throws FileNotFoundException, IOException, ParseException
+{
+	Utility utility = new Utility();
+	JSONObject jsonObjectshare = readFromJsonFile("share.json");
+	JSONArray jsonArrayShare = (JSONArray) jsonObjectshare.get("share");
+	System.out.println("enter the symbol of share company");
+	String shareSymbol = utility.inputString();
+	for(int i = 0 ; i < jsonArrayShare.size();i++)
+	{
+		
+	}
+}
+
+
+
+}
+
+
+
+
+
+
+
+

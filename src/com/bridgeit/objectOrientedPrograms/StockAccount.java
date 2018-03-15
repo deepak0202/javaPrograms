@@ -17,8 +17,7 @@ import com.bridgeit.utility.Utility;
 public class StockAccount 
 {
 	public static void main(String[] args) throws FileNotFoundException, IOException, ParseException 
-	{
-		
+	{	
 		Utility utility = new Utility();
 		int start;
 		do
@@ -359,7 +358,10 @@ public class StockAccount
 	public static void printDate()
 	{
 		Date date = new Date();
-		String d = new SimpleDateFormat("E yyyy.MM.dd at hh:mm:ss a").format(date);
+		String d = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a").format(date);
 		System.out.print("date" + d);
+		//queuueu uue=new hdhuhdu();
+		//add.(dghsvdg);
+		//dplay
 	}
 }

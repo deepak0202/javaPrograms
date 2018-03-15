@@ -8,7 +8,7 @@ import java.util.Map;
 public class test 
 {
 	public static void main(String[] args) throws IOException {
-	    File f = new File("appointment.json");
+	    File f = new File("regular.text");
 		f.createNewFile();
 		//System.out.println(f.length());
 		
