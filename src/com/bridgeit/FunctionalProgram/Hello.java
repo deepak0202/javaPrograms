@@ -17,7 +17,7 @@ class Hello {
 	public static void main(String[] args) {
 		Utility utility = new Utility();
 		System.out.println("enter the string");
-		String s = utility.inputString();
-		Utility.hello(s);
+		String name = utility.inputString();
+		Utility.hello(name);
 	}
 }

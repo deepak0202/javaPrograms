@@ -14,30 +14,6 @@ public class PrimeAnagram
 {
 	public static void main(String[] args) 
 	{
-		Linkedlist linkedlist = new Linkedlist();
-		Stack stack = new Stack(); 
-		for(int i=0;i<=1000;i++)
-		{
-			if(Utility.prime(i))
-			{
-				linkedlist.add(i);
-			}
-		}
-		for(int i = 0; i < linkedlist.size()-1;i++)
-		{
-			for(int j = i+1; j <linkedlist.size();j++)
-			{
-				if(Utility.anagram(linkedlist.dataAtPosition(i), linkedlist.dataAtPosition(j)))
-				{
-					stack.push(linkedlist.dataAtPosition(i));
-					stack.push(linkedlist.dataAtPosition(j));
-				}
-			}
-		}
-		while(!(stack.isEmpty()))
-		{
-			System.out.println((Integer)stack.pop());
-		}
+		Utility.primeAnagramUseingStack();
 	}
-
 }

@@ -11,10 +11,17 @@ package com.bridgeit.dataStructure;
 
 public class Queue1<T> 
 {
+	
+	@SuppressWarnings("rawtypes")
 	Node firstNode;
+	@SuppressWarnings("rawtypes")
 	Node lastNode;
+	
+	
+	@SuppressWarnings({ "unchecked", "hiding" })
 	public <T> void add(T data)
 	{
+		@SuppressWarnings("rawtypes")
 		Node newNode = new Node(data);
 		if(firstNode==null)
 		{
@@ -26,8 +33,10 @@ public class Queue1<T>
 		}
 		lastNode = newNode;
 	}
-	<T> boolean search(T dataToBeSearched)
+	@SuppressWarnings("hiding")
+	public <T> boolean search(T dataToBeSearched)
 	{
+			@SuppressWarnings("rawtypes")
 			Node current = firstNode;
 			while(current != null)
 			{
@@ -39,7 +48,8 @@ public class Queue1<T>
 			}
 			return false;
 	}
-	<T> boolean delete(T dataToBedeleted)
+	@SuppressWarnings({ "hiding", "unchecked" })
+	public <T> boolean delete(T dataToBedeleted)
 	{
 		if(firstNode.data.equals(dataToBedeleted))
 		{
@@ -48,7 +58,9 @@ public class Queue1<T>
 		}
 		else if(lastNode.data.equals(dataToBedeleted))
 		{
+			@SuppressWarnings("rawtypes")
 			Node currentNode = firstNode;
+			@SuppressWarnings("rawtypes")
 			Node prevNode = null;
 			while(currentNode != lastNode)
 			{
@@ -60,8 +72,10 @@ public class Queue1<T>
 		}
 		else
 		{
+			@SuppressWarnings("rawtypes")
 			Node prevrefrence = null;
 			boolean status  = false;
+			@SuppressWarnings("rawtypes")
 			Node current = firstNode;
 			
 			while(current != lastNode && !(status=(current.data.equals(dataToBedeleted))))
@@ -78,8 +92,9 @@ public class Queue1<T>
 		}
 		return false;
 	}
-	void itirate()
+	public void itirate()
 	{
+		@SuppressWarnings("rawtypes")
 		Node currentNode = firstNode;
 		while(currentNode != null)
 		{
@@ -87,9 +102,10 @@ public class Queue1<T>
 			currentNode = currentNode.forwardRefrence;
 		}
 	}
-	int size()
+	public int size()
 	{
 		int size = 0;
+		@SuppressWarnings("rawtypes")
 		Node currentNode = firstNode;
 		while(currentNode != null)
 		{
@@ -98,7 +114,8 @@ public class Queue1<T>
 		}
 		return size;
 	}
-	<T> T dataAtPosition(int position)
+	@SuppressWarnings({ "hiding", "unchecked" })
+	public <T> T dataAtPosition(int position)
 	{
 		int location = 0;
 		if(position >= this.size())
@@ -107,6 +124,7 @@ public class Queue1<T>
 		}
 		else
 		{
+			@SuppressWarnings("rawtypes")
 			Node currentNode = firstNode;
 			while(location != position)
 			{
@@ -116,7 +134,8 @@ public class Queue1<T>
 			return  (T) currentNode.data;
 		}
 	}
-	void deletelast()
+	@SuppressWarnings("unchecked")
+	public void deletelast()
 	{
 	
 			if(this.size() == 1)
@@ -129,7 +148,9 @@ public class Queue1<T>
 			}
 			else
 			{
+		@SuppressWarnings("rawtypes")
 		Node current = firstNode;
+		@SuppressWarnings("rawtypes")
 		Node prev=null;
 		while(current != lastNode)
 		{
@@ -139,21 +160,24 @@ public class Queue1<T>
 		prev.forwardRefrence = null;
 			}	
 	}
-	 void deletefirst()
+	public void deletefirst()
 	 {
 		 firstNode = firstNode.forwardRefrence;
 	 }
-	 <T> void enqueue(T data)
+	 @SuppressWarnings("hiding")
+	public <T> void enqueue(T data)
 	 {
 		 this.add(data);
 	 }
-	 <T> T dequeue()
+	@SuppressWarnings("hiding")
+	public <T> T dequeue()
 	 {
-		 T data = (T) firstNode.data;
+		 @SuppressWarnings("unchecked")
+		T data = (T) firstNode.data;
 		 this.deletefirst();
 		 return data;
 	 }
-	 boolean isEmpty()
+	public boolean isEmpty()
 	 {
 		 if(this.size() == 0)
 		 {

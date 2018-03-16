@@ -9,6 +9,7 @@
 package com.bridgeit.dataStructure;
  class Node<T>
 {
+	@SuppressWarnings("rawtypes")
 	Node forwardRefrence;
 	T data;
 	Node(T data1)
@@ -23,10 +24,12 @@ package com.bridgeit.dataStructure;
  *  @since   07-03-2018
  *
  ******************************************************************************/
+ @SuppressWarnings("rawtypes")
 public class LinkedList 
 {
 	Node firstNode;
 	Node lastNode;
+	@SuppressWarnings("unchecked")
 	public <T> void add(T data)
 	{
 		Node newNode = new Node(data);
@@ -53,6 +56,7 @@ public class LinkedList
 			}
 			return false;
 	}
+@SuppressWarnings("unchecked")
 public	<T> boolean delete(T dataToBedeleted)
 	{
 		if(firstNode.data.equals(dataToBedeleted))
@@ -112,6 +116,7 @@ public	<T> boolean delete(T dataToBedeleted)
 		}
 		return size;
 	}
+	@SuppressWarnings("unchecked")
 	public <T> T dataAtPosition(int position)
 	{
 		int location = 0;

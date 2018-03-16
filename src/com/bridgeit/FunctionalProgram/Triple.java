@@ -17,13 +17,13 @@ public class Triple
 	{
 		Utility utility = new Utility();
 		System.out.println("enter the number of integer to taken");
-		int l = utility.inputInteger();
-		int[] x = new int[l];
-		for(int i = 0; i<l;i++)
+		int length = utility.inputInteger();
+		int[] array = new int[length];
+		for(int i = 0; i<length;i++)
 		{
 			System.out.println("enter the " + i+"th element in array");
-			x[i] = utility.inputInteger();
+			array[i] = utility.inputInteger();
 		}
-		Utility.triplet(x);
+		Utility.triplet(array);
 	}
 }

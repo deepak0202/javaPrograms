@@ -15,13 +15,13 @@ import com.bridgeit.utility.Utility;
 
 public class Vending 
 {
-	static HashSet<Integer> h = new HashSet<Integer>();
+	static HashSet<Integer> hashSet = new HashSet<Integer>();
 	static int count;
 	public static void main(String[] args) 
 	{
 		Utility utility = new Utility();
 		System.out.println("enter a number");
 		 int change= utility.inputInteger();
-		 Utility.vending(change,count,h);
+		 Utility.vending(change,count,hashSet);
 	}
 }

@@ -9,7 +9,6 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
 import java.util.Deque;
@@ -17,7 +16,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Queue;
@@ -28,9 +26,6 @@ import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.swing.SwingConstants;
-import javax.swing.plaf.synth.SynthSeparatorUI;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -38,6 +33,8 @@ import org.json.simple.parser.ParseException;
 
 import com.bridgeit.dataStructure.LinkedList;
 import com.bridgeit.dataStructure.Linkedlist;
+import com.bridgeit.dataStructure.Person;
+import com.bridgeit.dataStructure.Queue1;
 import com.bridgeit.dataStructure.Stack;
 import com.bridgeit.objectOrientedPrograms.PredefineData;
 import com.bridgeit.objectOrientedPrograms.UserDetails;;
@@ -146,16 +143,16 @@ public class Utility
 	/**
 	 * @param stake = total amount of money gamble have
 	 * @param goal = total amount of money gamble want to reach
-	 * @param n = max number of times gamble will play
+	 * @param time = max number of times gamble will play
 	 *  it print wining and loss percent of gambler
 	 */
 	
-	public static void gambler(int stake,int goal,int n)
+	public static void gambler(int stake,int goal,int time)
 	{
 		int won = 0;
 		int loss = 0;
 		int heplayed = 0;
-		for(int i = 1; i <=n;i++)
+		for(int i = 1; i <=time;i++)
 		{
 			heplayed++;
 			if(Math.random() <0.5)
@@ -180,36 +177,35 @@ public class Utility
 		System.out.println("percent of loss " + lossPercent);
 	}
 	/**
-	 * @param n = number of coupon user wants to genrate
+	 * @param numberOfCoupon = number of coupon user wants to genrate
 	 * print distinct coupon number
 	 */
-	public static HashSet<Integer> coupon(int n)
+	public static HashSet<Integer> coupon(int numberOfCoupon)
 	{
 		int y = 0;
+		int min = 1;
 		Random r = new Random();
 		HashSet<Integer> h = new HashSet<Integer>();
-		while(h.size()!= n)
+		while(h.size()!= numberOfCoupon)
 		{
-			y = r.nextInt();
-			if(y>0)
-			{
+			y =min + r.nextInt(numberOfCoupon);
+
 				h.add(y);
-			}
 		}
 		return h;
 	}
 	/**
-	 * @param x = name of array whose triplete we want to genrate
+	 * @param array = name of array whose triplete we want to genrate
 	 * print triplet whose sum is zero
 	 */
-	public static void triplet(int[] x)
+	public static void triplet(int[] array)
 	{
-		int l = x.length;
-		for(int i = 0;i<l-2;i++)
+		int length = array.length;
+		for(int i = 0;i<length-2;i++)
 		{
-			if(x[i] + x[i+1]+x[i+2]==0)
+			if(array[i] + array[i+1]+array[i+2]==0)
 			{
-				System.out.println(x[i] + " " + x[i+1] + " " + x[i+2]);
+				System.out.println(array[i] + " " + array[i+1] + " " + array[i+2]);
 				
 			}
 		}
@@ -243,7 +239,7 @@ public class Utility
 		}
 	}
 	/**
-	 * 
+	 * take input as integer or boolean or double type array and print repective type
 	 */
 	public static void array2d()
 	{
@@ -259,40 +255,40 @@ public class Utility
 		switch (ca) 
 		{
 		case 1:
-			Integer[][] x= new Integer[row][colums];
+			Integer[][] array= new Integer[row][colums];
 			for(int i = 0; i<row;i++)
 			{
 				for(int j = 0; j<colums;j++)
 				{
 					System.out.println("enter x["+i+"]["+j+"] element of array");
-					x[i][j] = utility.inputInteger();
+					array[i][j] = utility.inputInteger();
 				}
 			}
-			printArray(x, row, colums);
+			printArray(array, row, colums);
 			break;
 			case 2:
-				Double[][] x1 = new Double[row][colums];
+				Double[][] array2 = new Double[row][colums];
 				for(int i = 0; i<row;i++)
 				{
 					for(int j = 0; j<colums;j++)
 					{
 						System.out.println("enter x["+i+"]["+j+"] element of array");
-						x1[i][j] = utility.inputDouble();
+						array2[i][j] = utility.inputDouble();
 					}
 				}
-				printArray(x1, row, colums);
+				printArray(array2, row, colums);
 				break;
 				case 3:
-					Boolean[][] x2 = new Boolean[row][colums];
+					Boolean[][] array3 = new Boolean[row][colums];
 					for(int i = 0; i<row;i++)
 					{
 						for(int j = 0; j<colums;j++)
 						{
 							System.out.println("enter x["+i+"]["+j+"] element of array");
-							x2[i][j] = utility.inputBoolean();
+							array3[i][j] = utility.inputBoolean();
 						}
 					}
-					printArray(x2, row, colums);
+					printArray(array3, row, colums);
 					break;
 					default:
 						System.out.println("enter correct number");
@@ -300,18 +296,18 @@ public class Utility
 		}
 	}
 	/**
-	 * @param x = name of the 2d array which we want to print
+	 * @param array = name of the 2d array which we want to print
 	 * @param row = number of rows in that array
 	 * @param colums = number of colums in that array
 	 */
-	public  static <T> void printArray(T[][] x,int row,int colums) 
+	public  static <T> void printArray(T[][] array,int row,int colums) 
 	{
 		PrintWriter printWriter = new PrintWriter(new OutputStreamWriter(System.out));
 		for (int i = 0; i < row; i++) 
 		{
 			for(int j = 0;j<colums;j++)
 			{
-			printWriter.print(x[i][j]+" ");
+			printWriter.print(array[i][j]+" ");
 			printWriter.flush();
 			}
 			printWriter.println();
@@ -346,19 +342,19 @@ public class Utility
 		return distance;
 	}
 	/**
-	 * @param n = numer till which power of two has to be calculate
+	 * @param number = number till which power of two has to be calculate
 	 * generate table of 2 pow 1 to 2 pow till number entered by user
 	 */
-	public static void power(int n)
+	public static void power(int number)
 	{
 		int value =0;
-		if(n<0|| n>31)
+		if(number<0|| number>31)
 		{
 			System.out.println("stack overflow");
 		}
 		else
 		{
-			for(int i = 0;i<=n;i++)
+			for(int i = 0;i<=number;i++)
 			{
 				value = (int) Math.pow(2, i);
 				System.out.println("2^"+i+" = " + value);
@@ -366,19 +362,19 @@ public class Utility
 		}
 	}
 	/**
-	 * @param n = represent till which number we have to find harmonic series sum
+	 * @param number = represent till which number we have to find harmonic series sum
 	 * it print the sum of n harmonic number
 	 */
-	public static void harmonic(double n)
+	public static void harmonic(double number)
 	{
 		double sum = 0;
-		if(n==0)
+		if(number==0)
 		{
 			System.out.println("enter a non zero number");
 		}
 		else
 		{
-			for(int i = 1; i<= n; i++)
+			for(int i = 1; i<= number; i++)
 			{
 				sum+=(double)1/i;
 			}
@@ -386,14 +382,14 @@ public class Utility
 		}
 	}
 	/**
-	 * @param n = takes number whose primeFactorization we have to found
+	 * @param number = takes number whose primeFactorization we have to found
 	 * print prime factor of the number
 	 */
-	public static void primeFactorization(int n)
+	public static void primeFactorization(int number)
 	{
-		for(int i = 1;i<n;i++)
+		for(int i = 1;i<number;i++)
 		{
-			if(n%i==0 && prime(i))
+			if(number%i==0 && prime(i))
 			{
 				System.out.println(i);
 			}
@@ -594,14 +590,14 @@ public class Utility
 		System.out.println(x[2][0]+"|"+x[2][1]+"|"+x[2][2]);
 	}
 	/**
-	 * @param s = String which has to be printed with msg
+	 * @param name = String which has to be printed with msg
 	 * check whether String is greater then 3 character if it is them print it with msg
 	 */
-public	static void hello(String s)
+public	static void hello(String name)
 	{
-	if(s.length()>=3)
+	if(name.length()>=3)
 	{
-	System.out.println("Hello " + s + ", How are you?");
+	System.out.println("Hello " + name + ", How are you?");
 	}
 	else
 	{
@@ -612,14 +608,14 @@ public	static void hello(String s)
 
 
 	/**
-	 * @param n = number of times we have to flip the coin
+	 * @param numberOfTimes = number of times we have to flip the coin
 	 * print the percent of head and tail occurrence
 	 */
-	public static void flipCoin(int n)
+	public static void flipCoin(int numberOfTimes)
 	{
 	int tail = 0;
 	int head = 0;
-	for(int i = 1; i<=n;i++)
+	for(int i = 1; i<=numberOfTimes;i++)
 	{
 	if(Math.random() <0.5)
 	{
@@ -630,23 +626,23 @@ public	static void hello(String s)
 	head++;
 	}
 	}
-	double headPercent = (head * 100) /n;
-	double tailPercent = (tail * 100) /n;
+	double headPercent = (head * 100) /numberOfTimes;
+	double tailPercent = (tail * 100) /numberOfTimes;
 	System.out.println("Head percent" + headPercent + "v/s tail Percent" + tailPercent);
 	}
 
 
 	/**
-	 * @param y= year which is to be checked whether leap or not
+	 * @param year= year which is to be checked whether leap or not
 	 * @return boolean if year is leap then true else false
 	 */
-	public static boolean leap(int y)
+	public static boolean leap(int year)
 	{
-	if(y%4==0)
+	if(year%4==0)
 			{
-				if(y%100==0)
+				if(year%100==0)
 				{
-					if(y%400==0)
+					if(year%400==0)
 					{
 						return true;
 					}
@@ -666,14 +662,25 @@ public	static void hello(String s)
 				return false;
 			}
 	}
+	/**
+	 * @return current time of system
+	 */
 	public static long start()
 	{
 		return  System.currentTimeMillis();
 	}
+	/**
+	 * @return  current time of system
+	 */
 	public static long end()
 	{
 		return  System.currentTimeMillis();
 	}
+	/**
+	 * @param start =  time value 
+	 * @param end = time value
+	 * @return diffrence bettween start and end
+	 */
 	public static long timeLaps(long start, long end)
 	{
 		return end - start;
@@ -741,35 +748,35 @@ public	static void hello(String s)
 		}
 
 		/**
-		 * @param s1 = String to be checked anagram with other string
-		 * @param s2 = String to be checked anagram with other string
+		 * @param string1 = String to be checked anagram with other string
+		 * @param string2 = String to be checked anagram with other string
 		 * @return boolean true if Strings are anagram else false
 		 */
-		public static boolean anagram(String s1,String s2)
+		public static boolean anagram(String string1,String string2)
 		{
-			String s3 = s1.replaceAll(" +", "").toLowerCase();
-			String s4 = s2.replaceAll(" +", "").toLowerCase();
-			char[] ch1 = s3.toCharArray();
-			char[] ch2 = s4.toCharArray();
-			int l1 = ch1.length;
-			int l2 = ch2.length;
-			for(int i = 0; i < l1; i++)
+			String string3 = string1.replaceAll(" +", "").toLowerCase();
+			String string4 = string2.replaceAll(" +", "").toLowerCase();
+			char[] ch1 = string3.toCharArray();
+			char[] ch2 = string4.toCharArray();
+			int length1 = ch1.length;
+			int length2 = ch2.length;
+			for(int i = 0; i < length1; i++)
 			{
 				l :
-				for(int j = 0; j < l2; j++)
+				for(int j = 0; j < length2; j++)
 				{
 					if(ch1[i]==ch2[j])
 					{
-						for(int k = j; k <l2-1;k++)
+						for(int k = j; k <length2-1;k++)
 						{
 						ch2[k]= ch2[k+1];
 						}
-						l2--;
+						length2--;
 						break l;
 					}
 				}
 			}
-			if(l2==0)
+			if(length2==0)
 			{
 			return true;
 			}
@@ -782,44 +789,44 @@ public	static void hello(String s)
 		/**
 		 * @param change = amount for which min number of change to be found
 		 * @param count = total number of notes return in starting take it as 0
-		 * @param h = refrence variable of hashset
+		 * @param hashSet = refrence variable of hashset
 		 * print the notes return by vending machine and and min number of notes to be return
 		 * its a recursive method
 		 */
-		public static void vending(int change,int count,HashSet<Integer> h)
+		public static void vending(int change,int count,HashSet<Integer> hashSet)
 		{
-			int[] x = {1000,500,100,50,10,5,2,1};
-			for(int i = 0; i<x.length;i++)
+			int[] notes = {1000,500,100,50,10,5,2,1};
+			for(int i = 0; i<notes.length;i++)
 			{
-				if(change>= x[i])
+				if(change>= notes[i])
 				{
-					change = change - x[i];
+					change = change - notes[i];
 					count++;
-					h.add(x[i]);
+					hashSet.add(notes[i]);
 					break;
 				}	
 			}
 			if(change == 0)
 			{
 				 System.out.println(count);
-				 System.out.println(h);
+				 System.out.println(hashSet);
 				return;
 			}
-			vending(change,count,h);
+			vending(change,count,hashSet);
 		}
 		/**
-		 * @param n = number to be checked whether palindrome or not
+		 * @param number = number to be checked whether palindrome or not
 		 * @return boolean true if number is palindrome else false
 		 */
-		public static boolean Palindrome(int n)
+		public static boolean Palindrome(int number)
 		{
-			String s = Integer.toString(n);
+			String numberString = Integer.toString(number);
 			String s1 ="";
-			for(int i = s.length()-1;i>=0;i--)
+			for(int i = numberString.length()-1;i>=0;i--)
 			{
-				s1+=s.charAt(i);
+				s1+=numberString.charAt(i);
 			}
-			if(s1.equals(s))
+			if(s1.equals(numberString))
 			{
 				return true;
 			}
@@ -905,46 +912,46 @@ public	static void hello(String s)
 			return x;
 		}
 		/**
-		 * @param x = String type of array which is to be sorted
+		 * @param array = String type of array which is to be sorted
 		 * @return String type sorted array use insertion sort algo 
 		 */
-		public static String[] insertionSort(String[] x)
+		public static String[] insertionSort(String[] array)
 		{
 			String key="";
 			int j=0;
-			for(int i = 0; i < x.length;i++)
+			for(int i = 0; i < array.length;i++)
 			{
 				j= i-1;
-				key = x[i];
+				key = array[i];
 				
-			while(j>=0 && x[j].compareTo(key)>0)
+			while(j>=0 && array[j].compareTo(key)>0)
 			{
-				x[j+1] = x[j];
+				array[j+1] = array[j];
 				j--;
 			}
-			x[j+1] = key;
+			array[j+1] = key;
 			}
-			return x;
+			return array;
 		}
 		/**
-		 * @param x = integer type array which is to be sort 
+		 * @param array = integer type array which is to be sort 
 		 * @return sorted array useing bubblesort algo
 		 */
-	public	static int[] bubbleSort(int[] x)
+	public	static int[] bubbleSort(int[] array)
 		{
-			for(int i = 0; i < x.length-1;i++)
+			for(int i = 0; i < array.length-1;i++)
 			{
-				for(int j = 0; j<x.length-i-1;j++)
+				for(int j = 0; j<array.length-i-1;j++)
 				{
-					if(x[j] > x[j+1])
+					if(array[j] > array[j+1])
 					{
-						int temp = x[j];
-						x[j] = x[j+1];
-						x[j+1] = temp;
+						int temp = array[j];
+						array[j] = array[j+1];
+						array[j+1] = temp;
 					}
 				}
 			}
-			return x;
+			return array;
 		}
 		/**
 		 * @param x =String type array which is to be sort 
@@ -1127,32 +1134,32 @@ public	static void hello(String s)
 		 * @param r = length of string
 		 * print all permutation of string pass 
 		 */
-		public static void permute(String str, int l, int r)
+		public static void permute(String str, int start, int end)
 		    {
-		        if (l == r)
+		        if (start == end)
 		            System.out.println(str);
 		        else
 		        {
-		            for (int i = l; i <= r; i++)
+		            for (int i = start; i <= end; i++)
 		            {
-		                str = swap(str,l,i);
-		                permute(str, l+1, r);
-		                str = swap(str,l,i);
+		                str = swap(str,start,i);
+		                permute(str, start+1, end);
+		                str = swap(str,start,i);
 		            }
 		        }
 		    }
 		 /**
-		 * @param a=name of the string whose charater are to be swaped
-		 * @param i= index of character to be swaped
+		 * @param str=name of the string whose charater are to be swaped
+		 * @param first= index of character to be swaped
 		 * @param j= index of character to be swaped
 		 * @return new string with its character swaped
 		 */
-		public static String swap(String a, int i, int j)
+		public static String swap(String str, int first, int j)
 		    {
 		        char temp;
-		        char[] charArray = a.toCharArray();
-		        temp = charArray[i] ;
-		        charArray[i] = charArray[j];
+		        char[] charArray = str.toCharArray();
+		        temp = charArray[first] ;
+		        charArray[first] = charArray[j];
 		        charArray[j] = temp;
 		        return String.valueOf(charArray);
 		    }
@@ -1195,6 +1202,7 @@ public	static void hello(String s)
 				}
 				line = bufferedReadder.readLine();
 			}
+			bufferedReadder.close();
 			return refernces;
 		}
 	/**
@@ -1213,6 +1221,7 @@ public	static void hello(String s)
 				printWriter.print(" ");
 			}
 			printWriter.flush();
+			printWriter.close();
 		}
 	/**
 	 * @throws IOException for file not found
@@ -1246,6 +1255,7 @@ public	static void hello(String s)
 			linkedlist.add(digit);
 		}
 		integerDataToFile(linkedlist,"integerdata1.text");
+		bufferedReader.close();
 	}
 	/**
 	 * @param refrences = refrence variable of linkedlist 
@@ -1264,7 +1274,7 @@ public	static void hello(String s)
 			printWriter.print(" ");
 		}
 		printWriter.flush();
-		System.out.println("done");
+		printWriter.close();
 	}
 	/**
 	 * @param ArithmeticExpression = string ArithmeticExpression which is to be checked balance or not
@@ -1608,6 +1618,10 @@ public static long binarySearchTree(int node)
 		return sum;
 	}
 }
+/**
+ * @throws FileNotFoundException
+ */
+@SuppressWarnings("unchecked")
 public static void writeInventoryJsonFile() throws FileNotFoundException
 {
 	Map<Object, Object> m;
@@ -1687,6 +1701,7 @@ public static JSONObject readFromJsonFile(String filename) throws FileNotFoundEx
     JSONObject jo = (JSONObject) obj;
     return jo;
 }
+@SuppressWarnings("rawtypes")
 public static void inventoryData(JSONObject jsonObject)
 {
 	JSONArray rice = (JSONArray) jsonObject.get("rice");
@@ -1695,10 +1710,10 @@ public static void inventoryData(JSONObject jsonObject)
 	
 	for(int i = 0; i <rice.size();i++)
 	{
-	Map m = (Map) rice.get(i);
-	String name = (String) m.get("name");
-	double weight = (double) m.get("weight");
-	double price = (double) m.get("price");
+	Map map = (Map) rice.get(i);
+	String name = (String) map.get("name");
+	double weight = (double) map.get("weight");
+	double price = (double) map.get("price");
 	double sum = weight * price;
 	System.out.println("total price for rice of varity " + name + " is " + sum);
 	}
@@ -1706,10 +1721,10 @@ public static void inventoryData(JSONObject jsonObject)
 	
 	for(int i = 0; i < wheat.size();i++)
 	{
-		Map m = (Map) wheat.get(i);
-		String name = (String) m.get("name");
-		double wieght = (double) m.get("weight");
-		double price = (double) m.get("price");
+		Map map = (Map) wheat.get(i);
+		String name = (String) map.get("name");
+		double wieght = (double) map.get("weight");
+		double price = (double) map.get("price");
 		double sum = wieght * price;
 		System.out.println("total price for wheat of varity " + name + " is " + sum);
 	}
@@ -1717,14 +1732,15 @@ public static void inventoryData(JSONObject jsonObject)
 	
 	for(int i = 0; i < pulse.size();i++)
 	{
-		Map m = (Map) pulse.get(i);
-		String name = (String) m.get("name");
-		double wieght = (double) m.get("weight");
-		double price = (double) m.get("price");
+		Map map = (Map) pulse.get(i);
+		String name = (String) map.get("name");
+		double wieght = (double) map.get("weight");
+		double price = (double) map.get("price");
 		double sum = wieght * price;
 		System.out.println("total price for pulse of varity " + name + " is " + sum);
 	}
 }
+@SuppressWarnings("unchecked")
 public static void writeStockJsonFile() throws IOException, ParseException
 {
 	Map<Object, Object> m;
@@ -1804,19 +1820,20 @@ public static void writeStockJsonFile() throws IOException, ParseException
 	printWriter.flush();
 	printWriter.close();		
 }
+@SuppressWarnings("rawtypes")
 public static void readStockJsonFile() throws FileNotFoundException, IOException, ParseException
 {
-	Map m;
+	Map map;
 	double stockTotalPrice = 0;
 	 JSONObject jsonObject = readFromJsonFile("stock.json");
 	 JSONArray jsonArray = (JSONArray) jsonObject.get("stock");
 	 System.out.println("stockName" + "\t" + "Numberofshare" + "\t" + "priceofshare" + "\t" + "total price");
 	 for(int i = 0; i< jsonArray.size();i++)
 	 {
-		 m =(Map) jsonArray.get(i);
-		 String stockName = (String) m.get("name");
-		 int numberOfShare = (int)(double) m.get("numberOfShare");
-		 double price = (double) m.get("price");
+		 map =(Map) jsonArray.get(i);
+		 String stockName = (String) map.get("name");
+		 int numberOfShare = (int)(double) map.get("numberOfShare");
+		 double price = (double) map.get("price");
 		 double sharePriceTotal = ((double)numberOfShare) * price;
 		 System.out.println(stockName +"\t"+"\t" +"\t"+ numberOfShare +"\t" + price + "\t"+"\t" + sharePriceTotal);
 		 stockTotalPrice += sharePriceTotal;
@@ -1832,6 +1849,7 @@ public static void printJsonObjectToFile(String fileName, JSONObject jsonObject)
 	printWriter.flush();
 	printWriter.close();
 }
+@SuppressWarnings("unchecked")
 public static void add() throws FileNotFoundException, IOException, ParseException
 {
 	Utility utility = new Utility();
@@ -1868,6 +1886,7 @@ public static void add() throws FileNotFoundException, IOException, ParseExcepti
 	printJsonObjectToFile("address.json", jsonObject);
 	System.out.println("person detail added in address book");
 }
+@SuppressWarnings("unchecked")
 public static void edit() throws FileNotFoundException, IOException, ParseException
 {
 	Utility utility = new Utility();
@@ -1951,6 +1970,7 @@ public static void edit() throws FileNotFoundException, IOException, ParseExcept
 	}
 	
 }
+@SuppressWarnings("unchecked")
 public static void delete() throws FileNotFoundException, IOException, ParseException
 {
 	System.out.println("enter the name of the person to be deleted");
@@ -1985,6 +2005,7 @@ public static void delete() throws FileNotFoundException, IOException, ParseExce
 		System.out.println("person not persent in address book");
 	}
 }
+@SuppressWarnings("unchecked")
 public static void sortByName() throws FileNotFoundException, IOException, ParseException
 {
 	JSONObject jsonObject = readFromJsonFile("address.json");
@@ -2016,6 +2037,7 @@ public static void sortByName() throws FileNotFoundException, IOException, Parse
 		System.out.println(jsonArray.get(i));
 	}
 }
+@SuppressWarnings("unchecked")
 public static void sortByZip() throws FileNotFoundException, IOException, ParseException
 {
 	JSONObject jsonObject = readFromJsonFile("address.json");
@@ -2228,6 +2250,7 @@ public static ArrayList<String[]> cardsInSequence()
 	}
 return swapList;	
 }
+@SuppressWarnings("unchecked")
 public static void addDoctor() throws FileNotFoundException, IOException, ParseException
 {
 	Utility utility = new Utility();
@@ -2283,6 +2306,7 @@ public static void addDoctor() throws FileNotFoundException, IOException, ParseE
 	printJsonObjectToFile("doctor.json", jsonObjectDoctor);
 	printJsonObjectToFile("appointment.json", appointment);
 	}
+@SuppressWarnings("unchecked")
 public static void addPatients() throws FileNotFoundException, IOException, ParseException
 {
 	Utility utility = new Utility();
@@ -2403,7 +2427,6 @@ public static void serachDoctorById(String doctorId,JSONObject pateint) throws F
 {
 	Utility utility = new Utility();
 	JSONObject doctor = null;
-	int index = 0;
 	boolean doctorPresent = false;
 	JSONObject jsonObjectDoctor = readFromJsonFile("doctor.json");
 	JSONArray jsonArrayDoctor = (JSONArray) jsonObjectDoctor.get("doctor");
@@ -2414,7 +2437,6 @@ public static void serachDoctorById(String doctorId,JSONObject pateint) throws F
 		if(id.equals(doctorId))
 		{
 			doctorPresent = true;
-			index = i;
 			break;
 		}	
 	}
@@ -2443,7 +2465,6 @@ public static void serachDoctorByName(String doctorName,JSONObject pateint) thro
 {
 	Utility utility = new Utility();
 	JSONObject doctor = null;
-	int index = 0;
 	boolean doctorPresent = false;
 	JSONObject jsonObjectDoctor = readFromJsonFile("doctor.json");
 	JSONArray jsonArrayDoctor = (JSONArray) jsonObjectDoctor.get("doctor");
@@ -2454,7 +2475,6 @@ public static void serachDoctorByName(String doctorName,JSONObject pateint) thro
 		if(name.equals(doctorName))
 		{
 			doctorPresent = true;
-			index = i;
 			break;
 		}	
 	}
@@ -2481,9 +2501,9 @@ public static void serachDoctorByName(String doctorName,JSONObject pateint) thro
 		System.out.println("the doctor you serched is not avaliable");
 	}
 }
+@SuppressWarnings("unchecked")
 static void checkavalbilityOfdocterbyId(String id,JSONObject patient) throws FileNotFoundException, IOException, ParseException
 {
-	boolean avalable = false;
 	Utility utility = new Utility();
 	System.out.println("enter the date in format of DDMMYYYY");
 	String date = utility.inputString();
@@ -2624,6 +2644,7 @@ public static void searchPatient() throws FileNotFoundException, IOException, Pa
 		break;
 	}
 }
+@SuppressWarnings("rawtypes")
 public static void bestDoctor() throws FileNotFoundException, IOException, ParseException
 {
 	HashMap<String, Integer> doctorsPatientCount = new HashMap<>();
@@ -2682,6 +2703,7 @@ public static JSONObject getDocterDetailsById(String doctorId) throws FileNotFou
 	}
 	return null;
 }
+@SuppressWarnings("rawtypes")
 public static void doctorPatientList() throws FileNotFoundException, IOException, ParseException
 {
 	JSONObject jsonObjectappointment = readFromJsonFile("appointment.json");
@@ -2785,17 +2807,816 @@ public static java.util.LinkedList<JSONObject> addCompanytoList() throws FileNot
 	}
 	return linkedList;
 }
+@SuppressWarnings("unchecked")
 public static void addShareCompany() throws FileNotFoundException, IOException, ParseException
 {
+	String shareSymbol = "";
+	
+	boolean itrate = true;
 	Utility utility = new Utility();
 	JSONObject jsonObjectshare = readFromJsonFile("share.json");
 	JSONArray jsonArrayShare = (JSONArray) jsonObjectshare.get("share");
-	System.out.println("enter the symbol of share company");
-	String shareSymbol = utility.inputString();
-	for(int i = 0 ; i < jsonArrayShare.size();i++)
+	while(itrate)
 	{
-		
+		boolean sharePresent = false;
+		System.out.println("enter the symbol of share company");
+	    shareSymbol = utility.inputString();
+		for(int i = 0 ; i < jsonArrayShare.size();i++)
+		{
+			JSONObject jsonObjectParticularShare = (JSONObject) jsonArrayShare.get(i);
+			String symbol = (String) jsonObjectParticularShare.get("shareSymbol");
+			if(symbol.equals(shareSymbol))
+			{
+				sharePresent = true;
+				break;
+			}
+		}
+		if(sharePresent)
+		{
+			System.out.println("enter diffrent symbol this symbol is already used by diffrent company");
+		}
+		else
+		{
+			itrate = false;
+		}
 	}
+	System.out.println("enter number of share company have");
+	String numberOfShare = utility.inputString();
+	System.out.println("enter price of each share");
+	String sharePrice = utility.inputString();
+	System.out.println("enter amount share company have");
+	String amount = utility.inputString();
+	JSONObject newShareJsonObject = new JSONObject();
+	newShareJsonObject.put("numberOfShare", numberOfShare);
+	newShareJsonObject.put("amount", amount);
+	newShareJsonObject.put("price", sharePrice);
+	newShareJsonObject.put("shareSymbol", shareSymbol);
+	jsonArrayShare.add(newShareJsonObject);
+	jsonObjectshare.put("share", jsonArrayShare);
+	printJsonObjectToFile("share.json", jsonObjectshare);
+	System.out.println("share company added succes");
+}
+@SuppressWarnings("unchecked")
+public static void deleteShareCompany() throws FileNotFoundException, IOException, ParseException
+{
+	int index = 0;
+	boolean sharePresent = false;
+	Utility utility = new Utility();
+	JSONObject jsonObjectshare = readFromJsonFile("share.json");
+	JSONArray jsonArrayShare = (JSONArray) jsonObjectshare.get("share");
+	System.out.println("enter the symbol of share company which you want to delete");
+	String shareSymbol = utility.inputString();
+	for(int i = 0; i < jsonArrayShare.size(); i++)
+	{
+		JSONObject jsonObjectParticularShare = (JSONObject) jsonArrayShare.get(i);
+		String symbol = (String) jsonObjectParticularShare.get("shareSymbol");
+		if(symbol.equals(shareSymbol))
+		{
+			sharePresent = true;
+			index  = i;
+			break;
+		}
+	}
+	if(sharePresent)
+	{
+		jsonArrayShare.remove(index);
+		jsonObjectshare.put("share", jsonArrayShare);
+		printJsonObjectToFile("share.json", jsonObjectshare);
+		System.out.println("share company deleted succes");
+	}
+	else
+	{
+		System.out.println("no share symbol present as = " + shareSymbol);
+	}
+}
+public static java.util.LinkedList<JSONObject> shareTransectionInList() throws FileNotFoundException, IOException, ParseException
+{
+	java.util.LinkedList<JSONObject> linkedList = new java.util.LinkedList<>();
+	
+	JSONObject jsonObjectShareSellBuy = Utility.readFromJsonFile("shareSellBuy.json");
+	JSONArray shareSellBuyArray = (JSONArray) jsonObjectShareSellBuy.get("transaction");
+	
+	for(int i = 0; i <  shareSellBuyArray.size();i++)
+	{
+		JSONObject transection = (JSONObject) shareSellBuyArray.get(i);
+		linkedList.add(transection);
+	}
+	return linkedList;
+}
+public static java.util.Queue<JSONObject> shareTransectionInQueue() throws FileNotFoundException, IOException, ParseException
+{
+	Queue<JSONObject> queue = new java.util.LinkedList<>();
+	
+	JSONObject jsonObjectShareSellBuy = Utility.readFromJsonFile("shareSellBuy.json");
+	JSONArray shareSellBuyArray = (JSONArray) jsonObjectShareSellBuy.get("transaction");
+	for(int i = 0; i < shareSellBuyArray.size();i++)	
+	{
+		JSONObject transection = (JSONObject) shareSellBuyArray.get(i);
+		queue.add(transection);
+	}
+	return queue;
+}
+@SuppressWarnings("unchecked")
+public static void stockAccount(String fileName) throws FileNotFoundException, IOException, ParseException
+{
+	int totalShare = 0;
+	Utility utility = new Utility();
+	Map<String, String> stockMap = new LinkedHashMap<>();
+	JSONObject jsonObject = Utility.readFromJsonFile(fileName);
+	JSONArray jsonArray = (JSONArray) jsonObject.get("user");
+	System.out.println("enter the stock name");
+	String stockName = utility.inputString();
+	stockMap.put("stockName", stockName);
+	System.out.println("enter how many compony you want to enter");
+	int numberOfCompany = utility.inputInteger();
+	for(int i = 0 ; i < numberOfCompany; i++)
+	{
+		System.out.println("enter the company symbol");
+		String symbol = utility.inputString();
+		System.out.println("enter number of share");
+		int numberOfShare = utility.inputInteger();
+		String numberOfShareString = Integer.toString(numberOfShare);
+		stockMap.put(symbol, numberOfShareString);
+		totalShare += numberOfShare;
+	}
+	String totalShareString = Integer.toString(totalShare);
+	stockMap.put("totalShare", totalShareString);
+	
+	System.out.println("enter the total amount stock have");
+	double amount = utility.inputDouble();
+	String amountString = Double.toString(amount);
+	stockMap.put("amount", amountString);
+	jsonArray.add(stockMap);
+
+	jsonObject.put("user", jsonArray);
+	PrintWriter printWriter = new PrintWriter(fileName);
+	printWriter.write(jsonObject.toJSONString());
+	printWriter.flush();
+	printWriter.close();
+	System.out.println(printDate());
+}
+@SuppressWarnings({ "rawtypes", "unchecked" })
+public static Map buy(double useramountEnter,String symbol,Map stockMap) throws FileNotFoundException, IOException, ParseException
+{
+	boolean present = false;
+	int index=0;
+	Map shareMap = new LinkedHashMap<>();
+	JSONObject jsonObject = Utility.readFromJsonFile("share.json");
+	JSONArray jsonArrayShare = (JSONArray) jsonObject.get("share");
+	
+	for(int i = 0; i < jsonArrayShare.size();i++ )
+	{
+		shareMap = (Map) jsonArrayShare.get(i);
+		if(shareMap.containsValue(symbol))
+		{
+			index = i;
+			present = true;
+			break;
+		}
+	}
+	if(present)
+	{
+		int numberOfShareOfSymbol = 0;
+		if(stockMap.get(symbol)!= null)
+		{
+		String numberOfShareOfSymbolString = (String) stockMap.get(symbol);
+		numberOfShareOfSymbol = Integer.parseInt(numberOfShareOfSymbolString);
+		}
+
+		String totalShareOfStockString = (String) stockMap.get("totalShare");
+		int totalshareOfStock = Integer.parseInt(totalShareOfStockString);
+		String amountOfStockString = (String) stockMap.get("amount");
+		double amountOfStock = Double.parseDouble(amountOfStockString);
+		
+		String shareAmountString = (String) shareMap.get("amount");
+		String shareNumberString = (String) shareMap.get("numberOfShare");
+		String sharePriceString = (String) shareMap.get("price");
+		
+		double shareTotalAmount = Double.parseDouble(shareAmountString);
+		int numberOfShare = Integer.parseInt(shareNumberString);
+		double sharePrice = Double.parseDouble(sharePriceString);
+		
+		double amountOfTransection;
+		if(useramountEnter% sharePrice == 0)
+		{
+			amountOfTransection = useramountEnter;
+		}
+		else
+		{
+			amountOfTransection = useramountEnter - (useramountEnter%sharePrice);
+		}
+		int numberOfShareToBuy = (int)(amountOfTransection / sharePrice);
+		
+		if(amountOfStock>=amountOfTransection)
+		{
+			if(numberOfShare>=numberOfShareToBuy)
+			{
+				double newStockAmount = amountOfStock - amountOfTransection;
+				int newShareOfStock = totalshareOfStock + numberOfShareToBuy;
+				int newShareOfSymbol = numberOfShareOfSymbol + numberOfShareToBuy;
+				
+				 
+				double newShareAmount = shareTotalAmount + amountOfTransection;
+				int newNumberOfshare = numberOfShare - numberOfShareToBuy;
+			
+				String newShareAmountString = Double.toString(newShareAmount);
+				String newNumberOfShareString = Integer.toString(newNumberOfshare);
+									
+				JSONObject jsonObjectShare = new JSONObject();
+				shareMap.put("amount",newShareAmountString);
+				shareMap.put("numberOfShare", newNumberOfShareString);
+				jsonArrayShare.set(index, shareMap);
+				jsonObjectShare.put("share", jsonArrayShare);
+				Utility.printJsonObjectToFile("share.json", jsonObjectShare);
+
+				String newStockAmountString = Double.toString(newStockAmount);
+				String newShareOfStockString = Integer.toString(newShareOfStock);
+				String newShareOfSymbolString = Integer.toString(newShareOfSymbol);
+				
+				
+				stockMap.put("amount", newStockAmountString);
+				stockMap.put("totalShare", newShareOfStockString);
+				stockMap.put(symbol, newShareOfSymbolString);
+				
+				//////
+				
+				JSONObject jsonObjectShareSellBuy = Utility.readFromJsonFile("shareSellBuy.json");
+				JSONArray shareSellBuyArray = (JSONArray) jsonObjectShareSellBuy.get("transaction");
+				
+				JSONObject newjsonObjectSellBuy = new JSONObject();
+				
+				String stockName = (String) stockMap.get("stockName");
+				String numberOfShareToBuyString = Integer.toString(numberOfShareToBuy);
+				
+				
+				newjsonObjectSellBuy.put("shareSymbol", symbol);
+				newjsonObjectSellBuy.put("numberOfShareTransection",numberOfShareToBuyString);
+				newjsonObjectSellBuy.put("buyOrSell", "buy");
+				newjsonObjectSellBuy.put("dateTime", printDate());
+				newjsonObjectSellBuy.put("stockName", stockName);
+				
+				shareSellBuyArray.add(newjsonObjectSellBuy);
+				jsonObjectShareSellBuy.put("transaction", shareSellBuyArray);
+				
+				Utility.printJsonObjectToFile("shareSellBuy.json", jsonObjectShareSellBuy);
+				
+				
+					
+				
+				return stockMap;
+			}
+			else
+			{
+				System.out.println("number of share avalable for sell are " + numberOfShare);
+			}
+		}
+		else
+		{
+			System.out.println("you dont have total amount");
+		}	
+	}
+	else
+	{
+		System.out.println("share not avalable for sale");
+	}
+	return stockMap;
+}
+@SuppressWarnings({ "rawtypes", "unchecked" })
+public static Map sell(Map stockMap) throws FileNotFoundException, IOException, ParseException
+{
+	Utility utility = new Utility();
+	boolean present = false;
+	int index=0;
+	Map shareMap = new LinkedHashMap<>();
+	JSONObject jsonObject = Utility.readFromJsonFile("share.json");
+	JSONArray jsonArrayShare = (JSONArray) jsonObject.get("share");
+	System.out.println("enter share symbol which you want to sell");
+	String symbol = utility.inputString();
+	System.out.println("enter number share you want to sell");
+	int numberOfShareToBeSell = utility.inputInteger();
+	
+	for(int i = 0; i < jsonArrayShare.size();i++ )
+	{
+		shareMap = (Map) jsonArrayShare.get(i);
+		if(shareMap.containsValue(symbol))
+		{
+			index = i;
+			present = true;
+			break;
+		}
+	}
+	if(present)
+	{
+		String numberOfShareOfSymbolString = (String) stockMap.get(symbol);
+		String totalNumberOfShareOfStockString = (String) stockMap.get("totalShare");
+		String amountOfStockString = (String) stockMap.get("amount");
+		
+		String totalShareOfCompanyString = (String) shareMap.get("numberOfShare");
+		String amountOfCompanyString = (String) shareMap.get("amount");
+		String sharePriceString = (String) shareMap.get("price");
+		
+		int numberOfShareOfSymbol = Integer.parseInt(numberOfShareOfSymbolString);
+		int totalNumberOfShareOfStock = Integer.parseInt(totalNumberOfShareOfStockString);
+		double amountOfStock = Double.parseDouble(amountOfStockString);
+		 
+		int totalShareOfCompany = Integer.parseInt(totalShareOfCompanyString);
+		double amountOfCompany = Double.parseDouble(amountOfCompanyString);
+		double priceOfShare = Double.parseDouble(sharePriceString);
+				
+		if(numberOfShareToBeSell<=numberOfShareOfSymbol)
+		{ 
+			int newNumberOfShareOfSysmbol = numberOfShareOfSymbol - numberOfShareToBeSell;
+			double transectionAmount = priceOfShare *(double) numberOfShareToBeSell;
+			double newAmountOfStock = amountOfStock + transectionAmount;
+			int newTotalNumberOfShareOfStock = totalNumberOfShareOfStock - numberOfShareToBeSell;
+			
+			int newTotalshareOfCompany = totalShareOfCompany + numberOfShareToBeSell;
+			double newAmountOfCompany = amountOfCompany - transectionAmount;
+			
+			String newNumberOfShareOfSymbolString = Integer.toString(newNumberOfShareOfSysmbol);
+			String newAmountOfStockString = Double.toString(newAmountOfStock);
+			String newTotalNumberOfShareOfStockString = Integer.toString(newTotalNumberOfShareOfStock);
+			
+			String newTotalShareOfCompanyString = Integer.toString(newTotalshareOfCompany);
+			String newAmountOfCompanyString = Double.toString(newAmountOfCompany);
+			
+			stockMap.put(symbol, newNumberOfShareOfSymbolString);
+			stockMap.put("amount", newAmountOfStockString);
+			stockMap.put("totalShare", newTotalNumberOfShareOfStockString);
+			
+			shareMap.put("numberOfShare", newTotalShareOfCompanyString);
+			shareMap.put("amount", newAmountOfCompanyString);
+			
+			jsonArrayShare.set(index, shareMap);
+			JSONObject newjsonObjectShare = new JSONObject();
+			newjsonObjectShare.put("share", jsonArrayShare);
+			
+			Utility.printJsonObjectToFile("share.json", newjsonObjectShare);	
+			
+			
+			JSONObject jsonObjectShareSellBuy = Utility.readFromJsonFile("shareSellBuy.json");
+			JSONArray shareSellBuyArray = (JSONArray) jsonObjectShareSellBuy.get("transaction");
+			
+			JSONObject newjsonObjectSellBuy = new JSONObject();
+			
+			String stockName = (String) stockMap.get("stockName");
+			String numberOfShareToBeSellString = Integer.toString(numberOfShareToBeSell);
+			
+			
+			
+			newjsonObjectSellBuy.put("stockName", stockName);
+			newjsonObjectSellBuy.put("shareSymbol", symbol);
+			newjsonObjectSellBuy.put("buyOrSell", "sell");
+			newjsonObjectSellBuy.put("dateTime", printDate());
+			newjsonObjectSellBuy.put("numberOfShareTransection",numberOfShareToBeSellString);
+			shareSellBuyArray.add(newjsonObjectSellBuy);
+			
+			jsonObjectShareSellBuy.put("transaction", shareSellBuyArray);
+			
+			
+			
+			Utility.printJsonObjectToFile("shareSellBuy.json", jsonObjectShareSellBuy);
+			
+			
+			
+			
+		}
+		else
+		{
+			System.out.println("you dont have that much share to sell");
+		}	
+	}
+	else
+	{
+		System.out.println("company not present to purches that share");
+	}	
+	return stockMap;
+}
+@SuppressWarnings("rawtypes")
+public static void printReport() throws FileNotFoundException, IOException, ParseException
+{
+	JSONObject jsonObjectstock = Utility.readFromJsonFile("stockAccount.json");
+	JSONArray jsonArray = (JSONArray) jsonObjectstock.get("user");
+	for(int i = 0; i < jsonArray.size();i++)
+	{
+		Map stockMap = (Map) jsonArray.get(i);
+		System.out.println(stockMap);	
+	}
+}
+public static String printDate()
+{
+	Date date = new Date();
+	String d = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a").format(date);
+	return d;
+}
+@SuppressWarnings({ "rawtypes", "unchecked" })
+public static void stockAccountController() throws FileNotFoundException, IOException, ParseException
+{
+	Utility utility = new Utility();
+	int start;
+	do
+	{
+	System.out.println("enter your choise");
+    System.out.println("enter 1 to create stockAount");
+	System.out.println("enter 2 to buy share");
+	System.out.println("enter 3 to sell share");
+	System.out.println("enter 4 to print report");
+	System.out.println("enter 5 to exist");
+	int choise = utility.inputInteger();
+	start = choise;
+	switch (choise) 
+	{
+	case 1:
+		stockAccount("stockAccount.json");
+		break;
+		case 2 :
+			boolean present = false;
+			int index = 0;
+			Map userMap = new LinkedHashMap<>();
+			System.out.println("enter stock name for which you want to buy share");
+			String stockName = utility.inputString();
+			JSONObject jsonObjectuser = Utility.readFromJsonFile("stockAccount.json");
+			JSONArray jsonArrayuser = (JSONArray) jsonObjectuser.get("user");
+			for(int i = 0; i < jsonArrayuser.size();i++)
+			{
+				userMap = (Map) jsonArrayuser.get(i);
+				if(userMap.containsValue(stockName))
+				{
+					index = i;
+					present = true;
+					break;
+				}
+			}
+			if(present)
+			{
+				System.out.println("you can buy following share at specific rate");
+				java.util.LinkedList<JSONObject> linkedList = Utility.addCompanytoList();
+				for(int i = 0; i < linkedList.size();i++)
+				{
+					JSONObject jsonObjectOfShare = linkedList.get(i);
+					String shareSysmbol = (String) jsonObjectOfShare.get("shareSymbol");
+					String Shareprice = (String) jsonObjectOfShare.get("price");
+					System.out.println(shareSysmbol +" at price of " + Shareprice +" per share");
+				}
+				String symbol = utility.inputString();
+				System.out.println("enter the total amount you want to spent to buy share");
+				double amount = utility.inputDouble();
+				Map stockMap =buy(amount, symbol, userMap);
+				
+	
+				JSONObject jsonObjectStock = new JSONObject();
+				jsonArrayuser.set(index, stockMap);
+				jsonObjectStock.put("user", jsonArrayuser);
+				
+				Utility.printJsonObjectToFile("stockAccount.json", jsonObjectStock);
+				
+				
+			}
+			else
+			{
+				System.out.println("stock not exist");
+				
+			}
+			break;
+		case 3 :
+			boolean present3 = false;
+			int index3 = 0;
+			Map userMap3 = new LinkedHashMap<>();
+			System.out.println("enter stock name for which you want to sell share");
+			String stockName3 = utility.inputString();
+			JSONObject jsonObjectuser3 = Utility.readFromJsonFile("stockAccount.json");
+			JSONArray jsonArrayuser3 = (JSONArray) jsonObjectuser3.get("user");
+			for(int i = 0; i < jsonArrayuser3.size();i++)
+			{
+				userMap3 = (Map) jsonArrayuser3.get(i);
+				if(userMap3.containsValue(stockName3))
+				{
+					index3 = i;
+					present3 = true;
+					break;
+				}
+			}
+			if(present3)
+			{
+			Map newUserMap =	sell(userMap3);
+			jsonArrayuser3.set(index3, newUserMap);
+			JSONObject jsonObjectnew = new JSONObject();
+			jsonObjectnew.put("user", jsonArrayuser3);
+			Utility.printJsonObjectToFile("stockAccount.json", jsonObjectnew);
+			
+				printDate();
+			}
+			else
+			{
+				System.out.println("stock not exist");
+			}
+			break;
+		case 4:
+			
+			printReport();
+			System.out.println(printDate());
+			break;
+	default:
+		break;
+	}
+	}
+	while(start < 5);
+}
+/**
+ * control the function of bancking system
+ */
+public static void bankController()
+{
+	com.bridgeit.dataStructure.Queue queue = new com.bridgeit.dataStructure.Queue();
+	Utility utility = new Utility();
+	System.out.println("enter the max number of person to be served");
+	int maxPerson = utility.inputInteger();
+	int numberOfPersonEntered = 0;
+	System.out.println("the money bank had");
+	int bankbalance = utility.inputInteger();
+	
+	while(numberOfPersonEntered != maxPerson)
+	{
+		System.out.println("person enter the bank");
+		System.out.println("enter the name of person");
+		String name = utility.inputString();
+		System.out.println("enter the amount he had");
+		int amount  = utility.inputInteger();
+		System.out.println("person enter the queue");
+		queue.enqueue(new Person(name, amount));
+		numberOfPersonEntered++;
+	}
+	while(!(queue.isEmpty()))
+			{
+		Person person = queue.dequeue();
+		System.out.println("enter 1 to deposit money and 2 to withdraw moeny");
+		int choice = utility.inputInteger();
+		switch (choice) {
+		case 1:
+			System.out.println("enter the money amount to be deposit");
+			int amount = utility.inputInteger();
+			if(person.moneyHehad >= amount)
+			{
+				person.moneyHehad -= amount;
+				bankbalance+=amount;
+			}
+			else
+			{
+				System.out.println("insuffcent aumont with " + person.Name);
+			}
+			break;
+           case 2:
+        	   System.out.println("enter the amount to be withdraw");
+        	   int withdrawMoney = utility.inputInteger();
+        	   if(bankbalance >= withdrawMoney)
+        	   {
+        		   bankbalance -= withdrawMoney;
+        		   person.moneyHehad +=withdrawMoney;
+        	   }
+        	   else
+        	   {
+        		   System.out.println("bank have insuffcent fund for your request come tommorow");
+        	   }
+			
+			break;
+
+		default:
+			break;
+		}
+		System.out.println("person servered detail");
+		System.out.println(person.Name + "----" + person.moneyHehad);
+	}
+}
+/**
+ * print the month calender by takeing user input
+ * with help of queue 
+ */
+@SuppressWarnings({ "rawtypes", "unchecked" })
+public static void calenderWithQueueControler()
+{
+	Utility utility = new Utility();
+	System.out.println("enter the month");
+	int month = utility.inputInteger();
+	System.out.println("enter the year");
+	int year = utility.inputInteger();
+	int start = Utility.dayOfMonthStarting(month, year);
+	java.util.Queue week  = new java.util.LinkedList<>();
+	int maxDay = Utility.maxDays(month, year);
+	int numberOfObject;
+	int date = 0;
+	if (maxDay + start > 35) {
+		numberOfObject = 6;
+	}
+	else 
+	{
+		numberOfObject = 5;
+	}
+	for (int i = 0; i < numberOfObject; i++) {
+		week.add(new java.util.LinkedList<>());
+	}
+	for (int i = 0; i < numberOfObject; i++) {
+		Queue queue = (Queue) week.poll();
+		if (i == 0) {
+			for (int j = 0; j < start; j++)
+			{
+				queue.add(" ");
+			}
+			for(int j = start;j<7;j++)
+			{
+				queue.add(++date);
+			}
+		}
+		else
+		{
+			for(int j = 0; j <7;j++)
+			{
+				queue.add(++date);
+				if(date == maxDay)
+				{
+					break;
+				}
+			}
+		}
+		week.add(queue);
+	}
+	System.out.println("SUN"+"\t"+"M"+"\t"+"TU"+"\t"+"WED"+"\t"+"TH"+"\t"+"FRI"+"\t"+"SAt");
+	for(int i = 0; i < numberOfObject; i++)
+	{
+		Queue queue = (Queue) week.poll();
+		int length = queue.size();
+		for(int j = 0; j <length; j++)
+		{
+			System.out.print(queue.poll());
+			System.out.print("\t");
+		}
+		System.out.println();
+	}
+}
+/**
+ * @param stringForPalindrome = name of string which is to be checked palindrome or not
+ * @return boolean true if string is palandrome else return false
+ */
+@SuppressWarnings({ "rawtypes", "unchecked" })
+public static boolean palindromeWithDeqeue(String stringForPalindrome)
+{
+	boolean check = false;
+	Deque deque =  new java.util.LinkedList();
+	Deque deque2 = new java.util.LinkedList();
+	char[] array = stringForPalindrome.toCharArray();
+	for(char value : array)
+	{
+		deque.push(value);
+		deque2.push(value);
+	}
+	while(deque.size() != 0)
+	{
+		if(deque.pop() == (deque2.removeLast()))
+		{
+			check = true;
+		}
+		else
+		{
+			check = false;
+			break;
+		}
+	}
+	return check;
+}
+/**
+ * print prime and anagram bettween 1 to 1000 by stack
+ */
+public static void primeAnagramUseingStack()
+{
+
+	Linkedlist linkedlist = new Linkedlist();
+	Stack stack = new Stack(); 
+	for(int i=0;i<=1000;i++)
+	{
+		if(Utility.prime(i))
+		{
+			linkedlist.add(i);
+		}
+	}
+	for(int i = 0; i < linkedlist.size()-1;i++)
+	{
+		for(int j = i+1; j <linkedlist.size();j++)
+		{
+			if(Utility.anagram(linkedlist.dataAtPosition(i), linkedlist.dataAtPosition(j)))
+			{
+				stack.push(linkedlist.dataAtPosition(i));
+				stack.push(linkedlist.dataAtPosition(j));
+			}
+		}
+	}
+	while(!(stack.isEmpty()))
+	{
+		System.out.println((Integer)stack.pop());
+	}
+}
+/**
+ * print prime and anagram bettween 1 to 1000 by queue
+ */
+@SuppressWarnings({ "rawtypes", "unchecked" })
+public static void primeAnagramUseingQueue()
+{
+	Queue1 queue = new Queue1();
+	Linkedlist linkedlist = new Linkedlist();
+	for(int i = 1; i<=1000;i++)
+	{
+		if(Utility.prime(i))
+		{
+			linkedlist.add(i);
+		}
+	}
+	for(int i =0; i <linkedlist.size()-1;i++)
+	{
+		for(int j = i+1; j < linkedlist.size();j++)
+		{
+			if(Utility.anagram(linkedlist.dataAtPosition(i), linkedlist.dataAtPosition(j)))
+			{
+				queue.enqueue(linkedlist.dataAtPosition(i));
+				queue.enqueue(linkedlist.dataAtPosition(j));
+			}
+		}
+	}
+	while(!(queue.isEmpty()))
+			{
+		System.out.println((Integer)queue.dequeue());
+			}
+}
+/**
+ * @throws IOException for if file not found
+ * take number from file and arrang them in slot
+ */
+public static void numberInSlotControler() throws IOException
+{
+	PrintWriter printWriter = new PrintWriter("numberSlot.text");
+	Linkedlist linkedlist = new Linkedlist();
+	HashMap<Integer, Linkedlist> hashMap = new HashMap<>();
+	BufferedReader bufferedReader = new BufferedReader(new FileReader("Integerdata.text"));
+	String line = bufferedReader.readLine();
+	while(line != null)
+	{
+		String[] array = line.split(" ");
+		for(String words : array)
+		{
+			linkedlist.add(Integer.parseInt(words));
+		}
+		line = bufferedReader.readLine();
+	}
+	for(int i = 0;i<linkedlist.size();i++)
+	{
+		int number = linkedlist.dataAtPosition(i);
+		int slot = number % 11;
+		if(hashMap.containsKey(slot))
+		{
+			hashMap.get(slot).add(number);
+		}
+		else
+		{
+			hashMap.put(slot, new Linkedlist());
+			hashMap.get(slot).add(number);
+		}
+	}
+	System.out.println("enter the digit to be searched");
+	Utility utility = new Utility();
+	int search = utility.inputInteger();
+	int slot = search % 11;
+	if(hashMap.containsKey(slot))
+	{
+		if(hashMap.get(slot).search(search))
+		{
+			hashMap.get(slot).delete(search);
+		}
+		else
+		{
+			hashMap.get(slot).add(search);
+		}
+	}
+	else
+	{
+		hashMap.put(slot, new Linkedlist());
+		hashMap.get(slot).add(search);
+	}
+		for(int i = 0; i<11;i++) 
+		{
+			if(hashMap.containsKey(i))
+				{
+				printWriter.println("\n["+i+"] ");
+
+				Linkedlist lk = hashMap.get(i);
+				
+					for(int j = 0; j < lk.size();j++)
+					{
+						printWriter.print(lk.dataAtPosition(j)+" ");
+					}
+					printWriter.println("\n");
+
+				}
+		}
+	printWriter.flush();
+	printWriter.close();
+	bufferedReader.close();
 }
 
 

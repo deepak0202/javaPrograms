@@ -17,8 +17,8 @@ public class Sqrt
 	{
 		Utility utility = new Utility();
 		System.out.println("enter the value");
-		int c = utility.inputInteger();
-		Utility.sqrt(c);
+		int number = utility.inputInteger();
+		Utility.sqrt(number);
 	}
 
 }

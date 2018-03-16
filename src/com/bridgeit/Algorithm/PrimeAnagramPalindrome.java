@@ -17,20 +17,20 @@ public class PrimeAnagramPalindrome
 {
 	public static void main(String[] args) 
 	{
-		ArrayList<Integer> al = new ArrayList<Integer>();
+		ArrayList<Integer> arrayList = new ArrayList<Integer>();
 		for(int i=0; i<=1000;i++)
 		{
 			if(Utility.prime(i) && Utility.Palindrome(i))
 			{
-				al.add(i);
+				arrayList.add(i);
 			}
 		}
-		for(int i = 0; i<al.size()-1;i++)
+		for(int i = 0; i<arrayList.size()-1;i++)
 		{
-			for(int j = i+1;j<al.size();j++)
+			for(int j = i+1;j<arrayList.size();j++)
 			{
-				int k = al.get(i);
-				int y = al.get(j);
+				int k = arrayList.get(i);
+				int y = arrayList.get(j);
 				if(Utility.anagram(k,y))
 				{
 					System.out.println(k +","+ y);

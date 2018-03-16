@@ -17,7 +17,7 @@ public class Harmonic
 	{
 		Utility utility = new Utility();
 		System.out.println("enter the value till we want to print harmonic");
-		double n = utility.inputDouble();
-		Utility.harmonic(n);
+		double number = utility.inputDouble();
+		Utility.harmonic(number);
 	}
 }

@@ -1,1 +1,31 @@
-{"address":[{"zip":"4546","firstName":"akash","lastName":"hjhj","phoneNumber":"3535","address":"ygyiyi gig","city":"hsdhh","state":"jhhfd"},{"zip":"23434","firstName":"deepak","lastName":"singh","phoneNumber":"5465454","address":"gov college","city":"hoshairpur","state":"punjab"},{"zip":"35554","firstName":"palvi","lastName":"singh","phoneNumber":"5454545","address":"dfh ho ipj","city":"hso","state":"punjab"}]}
+{
+	"address": [
+		{
+			"zip": "35554",
+			"firstName": "aalvi",
+			"lastName": "singh",
+			"phoneNumber": "5454545",
+			"address": "dfh ho ipj",
+			"city": "hso",
+			"state": "punjab"
+		},
+		{
+			"zip": "4546",
+			"firstName": "akash",
+			"lastName": "hjhj",
+			"phoneNumber": "3535",
+			"address": "ygyiyi gig",
+			"city": "hsdhh",
+			"state": "jhhfd"
+		},
+		{
+			"zip": "23434",
+			"firstName": "deepak",
+			"lastName": "singh",
+			"phoneNumber": "5465454",
+			"address": "gov college",
+			"city": "hoshairpur",
+			"state": "punjab"
+		}
+	]
+}

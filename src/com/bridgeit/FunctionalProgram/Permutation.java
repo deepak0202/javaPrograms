@@ -19,7 +19,7 @@ public class Permutation
 		Utility utility = new Utility();
 		System.out.println("enter the string");
 		String word = utility.inputString();
-		int l = word.length();
-		Utility.permute(word, 0, l-1);
+		int length = word.length();
+		Utility.permute(word, 0, length-1);
 	}
 }

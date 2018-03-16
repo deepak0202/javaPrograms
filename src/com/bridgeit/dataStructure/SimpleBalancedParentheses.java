@@ -9,8 +9,6 @@
 
 package com.bridgeit.dataStructure;
 
-import java.util.Scanner;
-
 import com.bridgeit.utility.Utility;
 
 public class SimpleBalancedParentheses 

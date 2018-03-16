@@ -23,7 +23,7 @@ public class Gambler
 		System.out.println("enter the goal amount");
 		int goal = utility.inputInteger();
 		System.out.println("enter the no of times he played");
-		int n = utility.inputInteger();
-		Utility.gambler(stake,goal,n);
+		int numberTimesHePlay = utility.inputInteger();
+		Utility.gambler(stake,goal,numberTimesHePlay);
 	}
 }

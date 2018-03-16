@@ -18,8 +18,8 @@ public class TemperaturConversion
 		Utility utility = new Utility();
 		System.out.println("enter f for Celsius to Fahrenheit");
 		System.out.println("enter c for Fahrenheit to Celsius");
-		String ch = utility.inputString();
-		switch (ch) 
+		String choices = utility.inputString();
+		switch (choices) 
 		{
 		case "f":
 			System.out.println("enter temp in celsius");

@@ -14,30 +14,7 @@ public class PrimeAnagramQueue
 {
 	public static void main(String[] args) 
 	{
-		Queue1 queue = new Queue1();
-		Linkedlist linkedlist = new Linkedlist();
-		for(int i = 1; i<=1000;i++)
-		{
-			if(Utility.prime(i))
-			{
-				linkedlist.add(i);
-			}
-		}
-		for(int i =0; i <linkedlist.size()-1;i++)
-		{
-			for(int j = i+1; j < linkedlist.size();j++)
-			{
-				if(Utility.anagram(linkedlist.dataAtPosition(i), linkedlist.dataAtPosition(j)))
-				{
-					queue.enqueue(linkedlist.dataAtPosition(i));
-					queue.enqueue(linkedlist.dataAtPosition(j));
-				}
-			}
-		}
-		while(!(queue.isEmpty()))
-				{
-			System.out.println((Integer)queue.dequeue());
-				}
+		Utility.primeAnagramUseingQueue();
 	}
 
 }

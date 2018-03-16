@@ -17,7 +17,7 @@ public class Power
 	public static void main(String[] args) 
 	{
 		System.out.println("enter the value of n " + args[0]);
-		int n = Integer.parseInt(args[0]);
-		Utility.power(n);
+		int number = Integer.parseInt(args[0]);
+		Utility.power(number);
 	}
 }

@@ -1,14 +1,14 @@
 {
 	"share": [
 		{
-			"numberOfShare": "204",
-			"amount": "600.0",
+			"numberOfShare": "202",
+			"amount": "800.0",
 			"price": "100",
 			"shareSymbol": "@"
 		},
 		{
-			"numberOfShare": "8",
-			"amount": "5480.0",
+			"numberOfShare": "18",
+			"amount": "5080.0",
 			"price": "40",
 			"shareSymbol": "!"
 		},
@@ -23,6 +23,12 @@
 			"amount": "6100.0",
 			"price": "100",
 			"shareSymbol": "&"
+		},
+		{
+			"numberOfShare": "0",
+			"amount": "10120.0",
+			"price": "10",
+			"shareSymbol": "*"
 		}
 	]
 }

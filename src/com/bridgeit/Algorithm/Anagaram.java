@@ -16,10 +16,10 @@ public class Anagaram
 	{
 		Utility utility = new Utility();
 		System.out.println("enter the 1st string");
-		String s1 = utility.inputString();
+		String string1 = utility.inputString();
 		System.out.println("enter the 2nd string");
-		String s2 = utility.inputString();
-		System.out.println(Utility.anagram(s1, s2));
+		String string2 = utility.inputString();
+		System.out.println(Utility.anagram(string1, string2));
 	}	
 
 }

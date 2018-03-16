@@ -17,12 +17,12 @@ public class DayOfWeek
 	public static void main(String[] args) 
 	{
 		System.out.println("enter value b/w 1 to 12 for respective month " + args[0]);
-		int m = Integer.parseInt(args[0]);
+		int month = Integer.parseInt(args[0]);
 		System.out.println("enter the day of the month " + args[1]);
-		int d = Integer.parseInt(args[1]);
+		int day = Integer.parseInt(args[1]);
 		System.out.println("enter the year " + args[2]);
-		int y = Integer.parseInt(args[2]);
-		int weekDay = Utility.dayOfWeek(m, d, y);
+		int year = Integer.parseInt(args[2]);
+		int weekDay = Utility.dayOfWeek(month, day, year);
 		Utility.printDayOfWeek(weekDay);
 	}
 }
