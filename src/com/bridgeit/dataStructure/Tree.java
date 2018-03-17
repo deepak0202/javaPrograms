@@ -23,8 +23,6 @@ public class Tree
 			System.out.println("Enter the nodes : ");
 			int nodes=utility.inputInteger();
 			System.out.println("For "+nodes+", "+Utility.binarySearchTree(nodes));
-		}
-		
+		}	
 	}
-
 }

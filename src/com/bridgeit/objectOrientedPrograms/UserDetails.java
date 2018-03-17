@@ -1,3 +1,10 @@
+/******************************************************************************
+*  Purpose: pojo class to get and set user details
+*  @author  Deepak Singh
+*  @version 1.0
+*  @since   15-03-2018
+*
+******************************************************************************/
 package com.bridgeit.objectOrientedPrograms;
 
 public class UserDetails 
@@ -40,7 +47,5 @@ public class UserDetails
 		}
 
 		public UserDetails(){
-		}
-
-		
+		}	
 }

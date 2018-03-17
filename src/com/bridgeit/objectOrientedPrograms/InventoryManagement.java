@@ -1,3 +1,11 @@
+
+/******************************************************************************
+*  Purpose: to calculate stock price of each stock and there total
+*  @author  Deepak Singh
+*  @version 1.0
+*  @since   15-03-2018
+*
+******************************************************************************/
 package com.bridgeit.objectOrientedPrograms;
 
 import java.io.FileNotFoundException;

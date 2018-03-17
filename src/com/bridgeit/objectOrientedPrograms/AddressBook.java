@@ -1,10 +1,18 @@
+/******************************************************************************
+*  Purpose: to add person detail in json file ,to edit person detail present in json file,
+*  to delete person detail in json file, to sort person detail by his nameand to sort person
+*  detail by zip number
+*  @author  Deepak Singh
+*  @version 1.0
+*  @since   15-03-2018
+*
+******************************************************************************/
+
 package com.bridgeit.objectOrientedPrograms;
 
 import java.io.FileNotFoundException;
 import java.io.IOException;
-
 import org.json.simple.parser.ParseException;
-
 import com.bridgeit.utility.Utility;
 
 public class AddressBook 

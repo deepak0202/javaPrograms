@@ -1,3 +1,10 @@
+/******************************************************************************
+*  Purpose: useing Regular Expression to modify the string
+*  @author  Deepak Singh
+*  @version 1.0
+*  @since   15-03-2018
+*
+******************************************************************************/
 package com.bridgeit.objectOrientedPrograms;
 
 import java.util.Date;

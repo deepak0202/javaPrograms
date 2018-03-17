@@ -1,3 +1,11 @@
+/******************************************************************************
+*  Purpose: to manage the working of clinique and find best doctor present in clinique
+*  @author  Deepak Singh
+*  @version 1.0
+*  @since   15-03-2018
+*
+******************************************************************************/
+
 package com.bridgeit.objectOrientedPrograms;
 
 import java.io.FileNotFoundException;

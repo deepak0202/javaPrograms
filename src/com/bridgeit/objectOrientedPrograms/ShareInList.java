@@ -1,3 +1,12 @@
+/******************************************************************************
+*  Purpose: to add share company object in linked list and to add new company and to
+*  remove exsting one
+*  @author  Deepak Singh
+*  @version 1.0
+*  @since   15-03-2018
+*
+******************************************************************************/
+
 package com.bridgeit.objectOrientedPrograms;
 
 import java.io.FileNotFoundException;

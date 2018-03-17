@@ -9,12 +9,9 @@
 
 package com.bridgeit.dataStructure;
 
-import java.io.UncheckedIOException;
-
-import com.bridgeit.Algorithm.*;
-
 class Node8<T>
 {
+	@SuppressWarnings("rawtypes")
 	Node8 forwardRefrence;
 	T data;
 	Node8(T data1)
@@ -24,8 +21,11 @@ class Node8<T>
 }
 public class Stack 
 {
+	@SuppressWarnings("rawtypes")
 	Node8 firstNode;
+	@SuppressWarnings("rawtypes")
 	Node8 lastNode;
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public <T> void add(T data)
 	{
 		Node8 newNode = new Node8(data);
@@ -39,6 +39,7 @@ public class Stack
 		}
 		lastNode = newNode;
 	}
+	@SuppressWarnings("rawtypes")
 	public <T> boolean search(T dataToBeSearched)
 	{
 			Node8 current = firstNode;
@@ -52,6 +53,7 @@ public class Stack
 			}
 			return false;
 	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public <T> boolean delete(T dataToBedeleted)
 	{
 		if(firstNode.data.equals(dataToBedeleted))
@@ -91,6 +93,7 @@ public class Stack
 		}
 		return false;
 	}
+	@SuppressWarnings("rawtypes")
 	public void itirate()
 	{
 		Node8 currentNode = firstNode;
@@ -100,6 +103,7 @@ public class Stack
 			currentNode = currentNode.forwardRefrence;
 		}
 	}
+	@SuppressWarnings("rawtypes")
 	public int size()
 	{
 		int size = 0;
@@ -111,6 +115,7 @@ public class Stack
 		}
 		return size;
 	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public <T> T dataAtPosition(int position)
 	{
 		int location = 0;
@@ -130,6 +135,7 @@ public class Stack
 			return  (T) currentNode.data;
 		}
 	}
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	public void deletelast()
 	{
 		if(this.size()==1)
@@ -153,12 +159,14 @@ public class Stack
 	{
 		this.add(data);
 	}
+	@SuppressWarnings("unchecked")
 	public <T> T pop()
 	{
 		T data =(T) lastNode.data;
 		this.deletelast();
 		return data;
 	}
+@SuppressWarnings("unchecked")
 public <T> T peek()
 	{
 		return (T) lastNode.data;

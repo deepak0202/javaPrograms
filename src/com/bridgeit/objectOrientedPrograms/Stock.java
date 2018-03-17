@@ -1,6 +1,14 @@
+/******************************************************************************
+*  Purpose: to add stock details in stock.json file
+*  and to read them
+*  remove exsting one
+*  @author  Deepak Singh
+*  @version 1.0
+*  @since   15-03-2018
+*
+******************************************************************************/
+
 package com.bridgeit.objectOrientedPrograms;
-
-
 
 import java.io.IOException;
 import java.text.ParseException;

@@ -1620,11 +1620,12 @@ public static long binarySearchTree(int node)
 }
 /**
  * @throws FileNotFoundException
+ * to take the user input about the inventory and add it to json file
  */
 @SuppressWarnings("unchecked")
 public static void writeInventoryJsonFile() throws FileNotFoundException
 {
-	Map<Object, Object> m;
+	Map<Object, Object> map;
 	Utility utility = new Utility();
 	PrintWriter printWriter = new PrintWriter("inventory.json");
 	JSONObject jsonObject = new JSONObject();
@@ -1637,17 +1638,17 @@ public static void writeInventoryJsonFile() throws FileNotFoundException
 	
 	for(int i = 1; i <= numberOfrice; i++)
 	{
-		m = new LinkedHashMap<>();
+		map = new LinkedHashMap<>();
 		System.out.println("enter the name of rice of " + i);
 		String riceName = utility.inputString();
 		System.out.println("enter weight of rice of" + i);
 		double weight = utility.inputDouble();
 		System.out.println("enter the price of rice of " + i);
 		double price = utility.inputDouble();
-		m.put("name", riceName);
-		m.put("weight", weight);
-		m.put("price", price);
-		jsonArrayOfRice.add(m);
+		map.put("name", riceName);
+		map.put("weight", weight);
+		map.put("price", price);
+		jsonArrayOfRice.add(map);
 	}
 	
 	System.out.println("enter number of pulse varity you want to enter in inventory");
@@ -1655,17 +1656,17 @@ public static void writeInventoryJsonFile() throws FileNotFoundException
 	
 	for(int i = 1; i<=numberOfPulse;i++)
 	{
-		m = new LinkedHashMap<>();
+		map = new LinkedHashMap<>();
 		System.out.println("enter the name of pulse of " + i);
 		String pulseName = utility.inputString();
 		System.out.println("enter the weight of pulse of " + i);
 		double weight = utility.inputDouble();
 		System.out.println("enter the price of pulse of " + i);
 		double price = utility.inputDouble();
-		m.put("name", pulseName);
-		m.put("weight", weight);
-		m.put("price", price);
-		jsonArrayOfPulse.add(m);
+		map.put("name", pulseName);
+		map.put("weight", weight);
+		map.put("price", price);
+		jsonArrayOfPulse.add(map);
 	}
 	
 	System.out.println("enter number of wheat varity you want to enter in inventory");
@@ -1673,17 +1674,17 @@ public static void writeInventoryJsonFile() throws FileNotFoundException
 	
 	for(int i = 1; i<=numberOfWheat; i++)
 	{
-		m = new LinkedHashMap<>();
+		map = new LinkedHashMap<>();
 		System.out.println("enter the name of wheat of " + i);
 		String wheatName = utility.inputString();
 		System.out.println("enter the weight of wheat of " + i);
 		double weight = utility.inputDouble();
 		System.out.println("enter the price of wheat of " + i);
 		double price = utility.inputDouble();
-		m.put("name", wheatName);
-		m.put("weight", weight);
-		m.put("price", price);
-		jsonArrayOfWheat.add(m);
+		map.put("name", wheatName);
+		map.put("weight", weight);
+		map.put("price", price);
+		jsonArrayOfWheat.add(map);
 	}
 	
 	jsonObject.put("rice", jsonArrayOfRice);
@@ -1695,12 +1696,23 @@ public static void writeInventoryJsonFile() throws FileNotFoundException
 	printWriter.close();
 	
 }
+/**
+ * @param filename = string argument of json file name
+ * @return the json object present in the file 
+ * @throws FileNotFoundException
+ * @throws IOException
+ * @throws ParseException
+ */
 public static JSONObject readFromJsonFile(String filename) throws FileNotFoundException, IOException, ParseException
 {
 	Object obj = new JSONParser().parse(new FileReader(filename));
     JSONObject jo = (JSONObject) obj;
     return jo;
 }
+/**
+ * @param jsonObject = Json object haveing details of inventory
+ * print calculated data of inventory 
+ */
 @SuppressWarnings("rawtypes")
 public static void inventoryData(JSONObject jsonObject)
 {
@@ -1740,10 +1752,15 @@ public static void inventoryData(JSONObject jsonObject)
 		System.out.println("total price for pulse of varity " + name + " is " + sum);
 	}
 }
+/**
+ * @throws IOException
+ * @throws ParseException
+ * to json object haveing details of stock in stock.json file
+ */
 @SuppressWarnings("unchecked")
 public static void writeStockJsonFile() throws IOException, ParseException
 {
-	Map<Object, Object> m;
+	Map<Object, Object> map;
 	Utility utility = new Utility();
 	JSONArray jsonArray = new JSONArray();
 	JSONObject jsonObject = new JSONObject();
@@ -1762,11 +1779,11 @@ public static void writeStockJsonFile() throws IOException, ParseException
 		double numberOfShare = utility.inputDouble();
 		System.out.println("enter the price of " + name);
 		double price = utility.inputDouble();
-		m = new LinkedHashMap<>();
-		m.put("name", name);
-		m.put("numberOfShare", numberOfShare);
-		m.put("price", price);
-		jsonArray.add(m);
+		map = new LinkedHashMap<>();
+		map.put("name", name);
+		map.put("numberOfShare", numberOfShare);
+		map.put("price", price);
+		jsonArray.add(map);
 	}
 	
 	jsonObject.put("stock", jsonArray);
@@ -1790,26 +1807,26 @@ public static void writeStockJsonFile() throws IOException, ParseException
 			
 			for(int i = 0; i < jsonArray2.size();i++)
 			{
-				m = (Map<Object, Object>) jsonArray2.get(i);
-				if(m.containsValue(name))
+				map = (Map<Object, Object>) jsonArray2.get(i);
+				if(map.containsValue(name))
 				{
 					present = true;		
 					index = i;
 					break;
 				}
 			}
-			m = new LinkedHashMap<>();
-			m.put("name", name);
-			m.put("numberOfShare", numberOfShare);
-			m.put("price", price);
+			map = new LinkedHashMap<>();
+			map.put("name", name);
+			map.put("numberOfShare", numberOfShare);
+			map.put("price", price);
 			if(present)
 			{
-				jsonArray2.set(index, m);
+				jsonArray2.set(index, map);
 				present = false;
 			}
 			else
 			{
-				jsonArray2.add(m);
+				jsonArray2.add(map);
 			}
 		}
 		jsonObject.put("stock", jsonArray2);
@@ -1820,6 +1837,12 @@ public static void writeStockJsonFile() throws IOException, ParseException
 	printWriter.flush();
 	printWriter.close();		
 }
+/**
+ * @throws FileNotFoundException
+ * @throws IOException
+ * @throws ParseException
+ * read data from stock and print calculated data
+ */
 @SuppressWarnings("rawtypes")
 public static void readStockJsonFile() throws FileNotFoundException, IOException, ParseException
 {
@@ -1842,6 +1865,11 @@ public static void readStockJsonFile() throws FileNotFoundException, IOException
 	 System.out.println("value of total stock : " + stockTotalPrice);
 }
 
+/**
+ * @param fileName = string argument haveing filename
+ * @param jsonObject = object which data will be printed in json file
+ * @throws FileNotFoundException
+ */
 public static void printJsonObjectToFile(String fileName, JSONObject jsonObject) throws FileNotFoundException
 {
 	PrintWriter printWriter = new PrintWriter(fileName);
@@ -1849,6 +1877,12 @@ public static void printJsonObjectToFile(String fileName, JSONObject jsonObject)
 	printWriter.flush();
 	printWriter.close();
 }
+/**
+ * @throws FileNotFoundException 
+ * @throws IOException
+ * @throws ParseException
+ * use to add person detaial as json object in address.json file
+ */
 @SuppressWarnings("unchecked")
 public static void add() throws FileNotFoundException, IOException, ParseException
 {
@@ -1886,6 +1920,12 @@ public static void add() throws FileNotFoundException, IOException, ParseExcepti
 	printJsonObjectToFile("address.json", jsonObject);
 	System.out.println("person detail added in address book");
 }
+/**
+ * @throws FileNotFoundException
+ * @throws IOException
+ * @throws ParseException
+ * to edit detail of person present in address.json file 
+ */
 @SuppressWarnings("unchecked")
 public static void edit() throws FileNotFoundException, IOException, ParseException
 {
@@ -1970,6 +2010,12 @@ public static void edit() throws FileNotFoundException, IOException, ParseExcept
 	}
 	
 }
+/**
+ * @throws FileNotFoundException
+ * @throws IOException
+ * @throws ParseException
+ * to delete person detail persent in address.json file
+ */
 @SuppressWarnings("unchecked")
 public static void delete() throws FileNotFoundException, IOException, ParseException
 {
@@ -2005,6 +2051,12 @@ public static void delete() throws FileNotFoundException, IOException, ParseExce
 		System.out.println("person not persent in address book");
 	}
 }
+/**
+ * @throws FileNotFoundException
+ * @throws IOException
+ * @throws ParseException
+ * to sort the person detail present address.json file by there name
+ */
 @SuppressWarnings("unchecked")
 public static void sortByName() throws FileNotFoundException, IOException, ParseException
 {
@@ -2037,6 +2089,12 @@ public static void sortByName() throws FileNotFoundException, IOException, Parse
 		System.out.println(jsonArray.get(i));
 	}
 }
+/**
+ * @throws FileNotFoundException
+ * @throws IOException
+ * @throws ParseException
+ * to sort the person detail by zip number in address.json file
+ */
 @SuppressWarnings("unchecked")
 public static void sortByZip() throws FileNotFoundException, IOException, ParseException
 {
@@ -2072,6 +2130,12 @@ public static void sortByZip() throws FileNotFoundException, IOException, ParseE
 		System.out.println(jsonArray.get(i));
 	}
 }
+/**
+ * @throws FileNotFoundException
+ * @throws IOException
+ * @throws ParseException
+ * to view all the content of  diffrent person present address.json file
+ */
 public static void displayAddressBook() throws FileNotFoundException, IOException, ParseException
 {
 	JSONObject jsonObject = readFromJsonFile("address.json");
@@ -2082,6 +2146,9 @@ public static void displayAddressBook() throws FileNotFoundException, IOExceptio
 	}
 	
 }
+/**
+ * @return arraylist haveing four string[] array each storeing players of cards
+ */
 public static ArrayList<String[]> deckOfCards()
 {
 	String[] suits = {"Clubs", "Diamonds", "Hearts", "Spades"};
@@ -2161,6 +2228,9 @@ public static ArrayList<String[]> deckOfCards()
 	arrayList.add(player4);
 	return arrayList;
  }
+/**
+ * @return return the array haveing cards of four player in sequence
+ */
 public static ArrayList<String[]> cardsInSequence()
 {
 	ArrayList<String[]> arrayList = deckOfCards();
@@ -2250,6 +2320,12 @@ public static ArrayList<String[]> cardsInSequence()
 	}
 return swapList;	
 }
+/**
+ * @throws FileNotFoundException
+ * @throws IOException
+ * @throws ParseException
+ * to add docter detail in doctor.json file
+ */
 @SuppressWarnings("unchecked")
 public static void addDoctor() throws FileNotFoundException, IOException, ParseException
 {
@@ -2306,6 +2382,12 @@ public static void addDoctor() throws FileNotFoundException, IOException, ParseE
 	printJsonObjectToFile("doctor.json", jsonObjectDoctor);
 	printJsonObjectToFile("appointment.json", appointment);
 	}
+/**
+ * @throws FileNotFoundException
+ * @throws IOException
+ * @throws ParseException
+ * to add patient detail in patient.json file
+ */
 @SuppressWarnings("unchecked")
 public static void addPatients() throws FileNotFoundException, IOException, ParseException
 {
@@ -2352,6 +2434,14 @@ public static void addPatients() throws FileNotFoundException, IOException, Pars
 	jsonObjectPatients.put("patients", jsonArraypatients);
 	printJsonObjectToFile("patients.json", jsonObjectPatients);	
 }
+/**
+ * @param pateint
+ * @throws FileNotFoundException
+ * @throws IOException
+ * @throws ParseException
+ * to serch doctor by name or id or specialization and book them if wanted and updateing 
+ * appointment.json file
+ */
 public static void serachAndbookdoctor(JSONObject pateint) throws FileNotFoundException, IOException, ParseException
 {
 	Utility utility = new Utility();
@@ -2378,6 +2468,13 @@ public static void serachAndbookdoctor(JSONObject pateint) throws FileNotFoundEx
 		break;
 	}
 }
+/**
+ * @param doctorSpecialization = string argument to take doctor Specialization
+ * @param pateint = json object argument to keep track which patient is serching the doctor
+ * @throws FileNotFoundException
+ * @throws IOException
+ * @throws ParseException
+ */
 public static void serachDoctorBySpecialization(String doctorSpecialization,JSONObject pateint) throws FileNotFoundException, IOException, ParseException
 {
 	ArrayList<JSONObject> doctorList = new ArrayList<>();
@@ -2423,6 +2520,13 @@ public static void serachDoctorBySpecialization(String doctorSpecialization,JSON
 	}
 }
 
+/**
+ * @param doctorId = string argument to take id of docter which is to be serched
+ * @param pateint = json object of patient who is serching the doctor
+ * @throws FileNotFoundException
+ * @throws IOException
+ * @throws ParseException
+ */
 public static void serachDoctorById(String doctorId,JSONObject pateint) throws FileNotFoundException, IOException, ParseException
 {
 	Utility utility = new Utility();
@@ -2461,6 +2565,13 @@ public static void serachDoctorById(String doctorId,JSONObject pateint) throws F
 		System.out.println("the doctor you serched is not avaliable");
 	}
 }
+/**
+ * @param doctorName = string argument to take docter name which is been serched
+ * @param pateint = json object of patient who is serching docter
+ * @throws FileNotFoundException
+ * @throws IOException
+ * @throws ParseException
+ */
 public static void serachDoctorByName(String doctorName,JSONObject pateint) throws FileNotFoundException, IOException, ParseException
 {
 	Utility utility = new Utility();
@@ -2501,6 +2612,13 @@ public static void serachDoctorByName(String doctorName,JSONObject pateint) thro
 		System.out.println("the doctor you serched is not avaliable");
 	}
 }
+/**
+ * @param id = to take doctor id
+ * @param patient = json object of patient who is serching the doctor
+ * @throws FileNotFoundException
+ * @throws IOException
+ * @throws ParseException
+ */
 @SuppressWarnings("unchecked")
 static void checkavalbilityOfdocterbyId(String id,JSONObject patient) throws FileNotFoundException, IOException, ParseException
 {
@@ -2555,6 +2673,12 @@ static void checkavalbilityOfdocterbyId(String id,JSONObject patient) throws Fil
 		}
 	}
 }
+/**
+ * @throws FileNotFoundException
+ * @throws IOException
+ * @throws ParseException
+ * to serch patient by name ,id ,mobil number
+ */
 public static void searchPatient() throws FileNotFoundException, IOException, ParseException
 {
 	ArrayList<JSONObject> arrayListPatient = new ArrayList<>();
@@ -2644,6 +2768,12 @@ public static void searchPatient() throws FileNotFoundException, IOException, Pa
 		break;
 	}
 }
+/**
+ * @throws FileNotFoundException
+ * @throws IOException
+ * @throws ParseException
+ * to  find the best doctor in clinique
+ */
 @SuppressWarnings("rawtypes")
 public static void bestDoctor() throws FileNotFoundException, IOException, ParseException
 {
@@ -2687,6 +2817,13 @@ public static void bestDoctor() throws FileNotFoundException, IOException, Parse
 	 System.out.println("best doctor of clinice details");
 	 System.out.println(bestdoctoerDetails);
 }
+/**
+ * @param doctorId = to take doctor to be serched id as string
+ * @return json object of docter detail if found else return null
+ * @throws FileNotFoundException
+ * @throws IOException
+ * @throws ParseException
+ */
 public static JSONObject getDocterDetailsById(String doctorId) throws FileNotFoundException, IOException, ParseException
 {
 	JSONObject doctor = null;
@@ -2703,6 +2840,12 @@ public static JSONObject getDocterDetailsById(String doctorId) throws FileNotFou
 	}
 	return null;
 }
+/**
+ * @throws FileNotFoundException
+ * @throws IOException
+ * @throws ParseException
+ * to print the docter detail along with the patient detail associated with it
+ */
 @SuppressWarnings("rawtypes")
 public static void doctorPatientList() throws FileNotFoundException, IOException, ParseException
 {
@@ -2743,12 +2886,21 @@ public static void doctorPatientList() throws FileNotFoundException, IOException
 		System.out.println("==============================");
 	}
 }
+/**
+ * @param date = to take argument as date
+ * @return = present date in proper format
+ */
 public String getFormatedDate(Date date)
 {
 	SimpleDateFormat sdf=new SimpleDateFormat("dd/MM/yyyy");
 	return sdf.format(date);
 }
 
+/**
+ * @param userDetails = object stroeing all details of user
+ * @param message = to string from file
+ * @return new string upadated
+ */
 public String convertString(UserDetails userDetails,String message)
 {
 	Pattern p = Pattern.compile(PredefineData.NAME);
@@ -2796,6 +2948,12 @@ public String getFileText(String fileName){
 	
 }
 
+/**
+ * @return linkedlist haveing details of share company
+ * @throws FileNotFoundException
+ * @throws IOException
+ * @throws ParseException
+ */
 public static java.util.LinkedList<JSONObject> addCompanytoList() throws FileNotFoundException, IOException, ParseException
 {
 	JSONObject jsonObjectshare = readFromJsonFile("share.json");
@@ -2807,6 +2965,12 @@ public static java.util.LinkedList<JSONObject> addCompanytoList() throws FileNot
 	}
 	return linkedList;
 }
+/**
+ * @throws FileNotFoundException
+ * @throws IOException
+ * @throws ParseException
+ * add share company in share.json file
+ */
 @SuppressWarnings("unchecked")
 public static void addShareCompany() throws FileNotFoundException, IOException, ParseException
 {
@@ -2856,6 +3020,12 @@ public static void addShareCompany() throws FileNotFoundException, IOException, 
 	printJsonObjectToFile("share.json", jsonObjectshare);
 	System.out.println("share company added succes");
 }
+/**
+ * @throws FileNotFoundException
+ * @throws IOException
+ * @throws ParseException
+ * to delete share company in share.json file
+ */
 @SuppressWarnings("unchecked")
 public static void deleteShareCompany() throws FileNotFoundException, IOException, ParseException
 {
@@ -2889,6 +3059,12 @@ public static void deleteShareCompany() throws FileNotFoundException, IOExceptio
 		System.out.println("no share symbol present as = " + shareSymbol);
 	}
 }
+/**
+ * @return linkedList haveing details of share company
+ * @throws FileNotFoundException
+ * @throws IOException
+ * @throws ParseException
+ */
 public static java.util.LinkedList<JSONObject> shareTransectionInList() throws FileNotFoundException, IOException, ParseException
 {
 	java.util.LinkedList<JSONObject> linkedList = new java.util.LinkedList<>();
@@ -2903,6 +3079,13 @@ public static java.util.LinkedList<JSONObject> shareTransectionInList() throws F
 	}
 	return linkedList;
 }
+/**
+ * @return queue Of json object haveing transection detail
+ * @throws FileNotFoundException
+ * @throws IOException
+ * @throws ParseException
+ * 
+ */
 public static java.util.Queue<JSONObject> shareTransectionInQueue() throws FileNotFoundException, IOException, ParseException
 {
 	Queue<JSONObject> queue = new java.util.LinkedList<>();
@@ -2916,6 +3099,13 @@ public static java.util.Queue<JSONObject> shareTransectionInQueue() throws FileN
 	}
 	return queue;
 }
+/**
+ * @param fileName
+ * @throws FileNotFoundException
+ * @throws IOException
+ * @throws ParseException
+ * insert json object haveing stock detail in file
+ */
 @SuppressWarnings("unchecked")
 public static void stockAccount(String fileName) throws FileNotFoundException, IOException, ParseException
 {
@@ -2955,6 +3145,15 @@ public static void stockAccount(String fileName) throws FileNotFoundException, I
 	printWriter.close();
 	System.out.println(printDate());
 }
+/**
+ * @param useramountEnter = for which amount user has to buy share
+ * @param symbol = which share we want to buy
+ * @param stockMap = Map haveing details of stock which wants to buy share
+ * @return upade detail after buy opration of stock
+ * @throws FileNotFoundException
+ * @throws IOException
+ * @throws ParseException
+ */
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public static Map buy(double useramountEnter,String symbol,Map stockMap) throws FileNotFoundException, IOException, ParseException
 {
@@ -3038,8 +3237,6 @@ public static Map buy(double useramountEnter,String symbol,Map stockMap) throws 
 				stockMap.put("totalShare", newShareOfStockString);
 				stockMap.put(symbol, newShareOfSymbolString);
 				
-				//////
-				
 				JSONObject jsonObjectShareSellBuy = Utility.readFromJsonFile("shareSellBuy.json");
 				JSONArray shareSellBuyArray = (JSONArray) jsonObjectShareSellBuy.get("transaction");
 				
@@ -3047,8 +3244,7 @@ public static Map buy(double useramountEnter,String symbol,Map stockMap) throws 
 				
 				String stockName = (String) stockMap.get("stockName");
 				String numberOfShareToBuyString = Integer.toString(numberOfShareToBuy);
-				
-				
+		
 				newjsonObjectSellBuy.put("shareSymbol", symbol);
 				newjsonObjectSellBuy.put("numberOfShareTransection",numberOfShareToBuyString);
 				newjsonObjectSellBuy.put("buyOrSell", "buy");
@@ -3059,10 +3255,7 @@ public static Map buy(double useramountEnter,String symbol,Map stockMap) throws 
 				jsonObjectShareSellBuy.put("transaction", shareSellBuyArray);
 				
 				Utility.printJsonObjectToFile("shareSellBuy.json", jsonObjectShareSellBuy);
-				
-				
-					
-				
+			
 				return stockMap;
 			}
 			else
@@ -3081,6 +3274,13 @@ public static Map buy(double useramountEnter,String symbol,Map stockMap) throws 
 	}
 	return stockMap;
 }
+/**
+ * @param stockMap = stock details which wants to sell share
+ * @return update details of stock
+ * @throws FileNotFoundException
+ * @throws IOException
+ * @throws ParseException
+ */
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public static Map sell(Map stockMap) throws FileNotFoundException, IOException, ParseException
 {
@@ -3192,6 +3392,12 @@ public static Map sell(Map stockMap) throws FileNotFoundException, IOException, 
 	}	
 	return stockMap;
 }
+/**
+ * @throws FileNotFoundException
+ * @throws IOException
+ * @throws ParseException
+ * print the details of diffrent stock
+ */
 @SuppressWarnings("rawtypes")
 public static void printReport() throws FileNotFoundException, IOException, ParseException
 {
@@ -3203,12 +3409,21 @@ public static void printReport() throws FileNotFoundException, IOException, Pars
 		System.out.println(stockMap);	
 	}
 }
+/**
+ * @return return the object of current date and time
+ */
 public static String printDate()
 {
 	Date date = new Date();
 	String d = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a").format(date);
 	return d;
 }
+/**
+ * @throws FileNotFoundException
+ * @throws IOException
+ * @throws ParseException
+ * manage stock sell and buy details
+ */
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public static void stockAccountController() throws FileNotFoundException, IOException, ParseException
 {
@@ -3546,7 +3761,7 @@ public static void primeAnagramUseingQueue()
 }
 /**
  * @throws IOException for if file not found
- * take number from file and arrang them in slot
+ * take number from file and arrange them in slot
  */
 public static void numberInSlotControler() throws IOException
 {
@@ -3618,9 +3833,180 @@ public static void numberInSlotControler() throws IOException
 	printWriter.close();
 	bufferedReader.close();
 }
+/**
+ * @param arrayList = contion 4 string[] array each haveing player cards
+ * print the card of each player
+ */
+public static void printCardsOfPlayers(ArrayList<String[]> arrayList)
+{
+	String[] array = arrayList.get(0);
+	System.out.println("cards of player 1");
+	for(int i = 0; i < 13; i++)
+	{
+		System.out.println(array[i]);
+	}
+	System.out.println();
+	System.out.println("cards of player 2");
+	array = arrayList.get(1);
+	for(int i = 0; i < 13; i++)
+	{
+		 System.out.println(array[i]);
+	}
+	System.out.println();
+	System.out.println("cards of player 3");
+	array = arrayList.get(2);
+	for(int i = 0; i < 13; i++)
+	{
+		System.out.println(array[i]);
+	}
+	System.out.println();
+	System.out.println("card of player 4");
+	array = arrayList.get(3);
+	for(int i = 0; i < 13; i++)
+	{
+		System.out.println(array[i]);
+	}
+}
+/**
+ * @param array = array to be sorted
+ * @param low = 0
+ * @param high = length of the array
+ * sort array useing merge sort algorithm
+ */
+public static void mergesort(int array[],int low,int high)
+{
+	int n = high - low;		
+	if(n<=1)
+		return;
+	int mid = low + n/2;
+	mergesort(array,low,mid);
+	mergesort(array, mid, high);
+	int temp[] = new int[n];
+	int i=low,j=mid;	
+	for(int k=0;k<n;k++)
+	{
+		if(i==mid)
+		{
+			temp[k] = array[j++];
+		}
+		else if(j == high)
+		{
+			temp[k] = array[i++];
+		}
+		else if(array[j] < array[i])
+		{
+			temp[k] = array[j++];
+		}
+		else
+		{
+			temp[k] = array[i++];
+		}
+	}
+	for (int k = 0; k < n; k++) 
+        array[low + k] = temp[k];   
+}
+/**
+ * @param array = name of the array in which value is to be searched
+ * @param intElement = elemnet to be serached 
+ * @param startingIndex = start index of array
+ * @param lastIndex = last index of array
+ */
+public static <T extends Comparable<T>> void binarySearch(T[] array,T intElement,int startingIndex,int lastIndex)
+{
+	int middleIndex = 0;
+	middleIndex=(startingIndex+lastIndex)/2;
+	if(intElement.equals(array[middleIndex]))
+	{
+		System.out.println("Found the Word");
+	}
+	else if(startingIndex==lastIndex)
+	{
+		System.out.println("There is no such element");
+	}
+	else 
+	{
+		if(array[middleIndex].compareTo((T) intElement)>0)
+		{
+			binarySearch(array,intElement,startingIndex,middleIndex);
+		}
+		else
+		{
+			binarySearch(array,intElement,middleIndex+1,lastIndex);	
+		}
+	}
+}
+/**
+ * @return Interger type of array
+ */
+public static Integer[] inputIntegerArray()
+{
+	Utility utility = new Utility();
+	System.out.println("enter the length of array");
+	int length = utility.inputInteger();
+	Integer[] array = new Integer[length];
+	for(int i = 0; i <length; i++)
+	{
+		System.out.println("enter the " + i + "th element of array");
+		array[i] = utility.inputInteger();
+		
+	}
+	return array;
+}
+/**
+ * @return string type of array
+ */
+public static String[] inputStringArray()
+{
+	Utility utility = new Utility();
+	System.out.println("enter the length of array");
+	int length = utility.inputInteger();
+	String[] array = new String[length];
+	for(int i = 0; i <length; i++)
+	{
+		System.out.println("enter the " + i + "th element of array");
+		array[i] = utility.inputString();
+	}
+	return array;
+}
+public static int[] inputintegerArray()
+{
+	Utility utility = new Utility();
+	System.out.println("enter the length of array");
+	int length = utility.inputInteger();
+	int[] array = new int[length];
+	for(int i = 0; i <length; i++)
+	{
+		System.out.println("enter the " + i + "th element of array");
+		array[i] = utility.inputInteger();
+	}
+	return array;
+}
+public static void readFileAndBinarySearch(String filename) throws IOException
+{
+	Utility utility = new Utility();
+	ArrayList<String> arrayList = new ArrayList<>();
+	BufferedReader bufferedReader = new BufferedReader(new FileReader(filename));
+	String line = bufferedReader.readLine();
+	while(line != null)
+	{
+		String[] words = line.split(",");
+		for(String word : words)
+		{
+			arrayList.add(word);
+		}
+		line = bufferedReader.readLine();
+	}
+	bufferedReader.close();
+	String[] wordList = new String[arrayList.size()];
+	for(int i = 0; i < arrayList.size();i++)
+	{
+		wordList[i] = arrayList.get(i);
+	}
+	System.out.println("enter the word to bhe searched");
+	String serched = utility.inputString();
+	binarySearch(wordList, serched, 0, wordList.length-1);
 
-
-
+}
 }
 
 

@@ -1,3 +1,10 @@
+/******************************************************************************
+*  Purpose: add share company details to the linkedList and print them
+*  @author  Deepak Singh
+*  @version 1.0
+*  @since   15-03-2018
+*
+******************************************************************************/
 package com.bridgeit.objectOrientedPrograms;
 
 import java.io.FileNotFoundException;
