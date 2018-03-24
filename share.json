@@ -1,1 +1,34 @@
-{"share":[{"numberOfShare":"192","amount":"1800.0","price":"100","shareSymbol":"@"},{"numberOfShare":"18","amount":"5080.0","price":"40","shareSymbol":"!"},{"numberOfShare":"100","amount":"10000","price":"1000","shareSymbol":"#"},{"numberOfShare":"199","amount":"6100.0","price":"100","shareSymbol":"&"},{"numberOfShare":"0","amount":"10120.0","price":"10","shareSymbol":"*"}]}
+{
+	"share": [
+		{
+			"numberOfShare": "192",
+			"amount": "1800.0",
+			"price": "100",
+			"shareSymbol": "@"
+		},
+		{
+			"numberOfShare": "18",
+			"amount": "5080.0",
+			"price": "40",
+			"shareSymbol": "!"
+		},
+		{
+			"numberOfShare": "100",
+			"amount": "10000",
+			"price": "1000",
+			"shareSymbol": "#"
+		},
+		{
+			"numberOfShare": "199",
+			"amount": "6100.0",
+			"price": "100",
+			"shareSymbol": "&"
+		},
+		{
+			"numberOfShare": "10",
+			"amount": "10120.0",
+			"price": "10",
+			"shareSymbol": "*"
+		}
+	]
+}

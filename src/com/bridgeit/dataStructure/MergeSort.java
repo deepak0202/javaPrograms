@@ -1,3 +1,10 @@
+/******************************************************************************
+*  Purpose: sorting of int array with the help of merge sort
+*  @author  Deepak Singh
+*  @version 1.0
+*  @since   05-03-2018
+*
+******************************************************************************/
 package com.bridgeit.dataStructure;
 
 import com.bridgeit.utility.Utility;

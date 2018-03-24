@@ -1,3 +1,11 @@
+/******************************************************************************
+*  Purpose: contains diffrent methods
+*  @author  Deepak Singh
+*  @version 1.0
+*  @since   21-03-2018
+*
+******************************************************************************/
+
 package com.bridgeit.utility;
 
 import java.io.BufferedReader;
@@ -25,12 +33,10 @@ import java.util.Set;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.json.simple.parser.ParseException;
-
 import com.bridgeit.dataStructure.LinkedList;
 import com.bridgeit.dataStructure.Linkedlist;
 import com.bridgeit.dataStructure.Person;
@@ -39,23 +45,25 @@ import com.bridgeit.dataStructure.Stack;
 import com.bridgeit.objectOrientedPrograms.PredefineData;
 import com.bridgeit.objectOrientedPrograms.UserDetails;;
 
+/**
+ * @author bridgeit
+ *
+ */
 public class Utility 
 {
-	public static Scanner scanner;
+	public static Scanner scanner; 
 	
-	
-	 
-	 
 	/**
-	 *  
+	 *  Utility class constructor
 	 */
 	public Utility()
 	{
 		scanner = new Scanner(System.in);
 		
 	}
+	
 	/**
-	 * @return string input given by the user
+	 * @return string pass as input by the user
 	 */
 	public  String inputString()
 	{
@@ -69,6 +77,10 @@ public class Utility
 		}
 		return "";
 	}
+	
+	/**
+	 * @return long input by the customer
+	 */
 	public  long inputLong()
 	{
 		try
@@ -81,9 +93,10 @@ public class Utility
 		}
 		return 0;
 	}
-	
-	
-	
+
+	/**
+	 * @return string line of string input taken by the customer
+	 */
 	public  String inputStringLine()
 	{
 		try
@@ -97,6 +110,7 @@ public class Utility
 		}
 		return "";
 	}
+	
 	/**
 	 * @return int value given by the user
 	 */
@@ -111,6 +125,7 @@ public class Utility
 		}
 		return 0;
 	}
+	
 	/**
 	 * @return double value given by the user
 	 */
@@ -125,6 +140,7 @@ public class Utility
 		}
 		return 0.0;
 	}
+	
 	/**
 	 * @return boolean value given by the user
 	 */
@@ -176,6 +192,7 @@ public class Utility
 		double lossPercent = (double) (loss*100)/(double) heplayed;
 		System.out.println("percent of loss " + lossPercent);
 	}
+	
 	/**
 	 * @param numberOfCoupon = number of coupon user wants to genrate
 	 * print distinct coupon number
@@ -194,6 +211,7 @@ public class Utility
 		}
 		return h;
 	}
+	
 	/**
 	 * @param array = name of array whose triplete we want to genrate
 	 * print triplet whose sum is zero
@@ -210,6 +228,7 @@ public class Utility
 			}
 		}
 	}
+	
 	/**
 	 * @param a = value present in quadratic equation with x^2
 	 * @param b = value present in quadratic equation with x
@@ -238,6 +257,7 @@ public class Utility
 			System.out.println("roots are imaginary");
 		}
 	}
+	
 	/**
 	 * take input as integer or boolean or double type array and print repective type
 	 */
@@ -295,6 +315,7 @@ public class Utility
 						break;
 		}
 	}
+	
 	/**
 	 * @param array = name of the 2d array which we want to print
 	 * @param row = number of rows in that array
@@ -314,6 +335,7 @@ public class Utility
 		}
 		
 	}
+	
 	/**
 	 * @param t = temperature in Fahrenheit
 	 * @param v = wind speed in  miles per hours
@@ -331,6 +353,7 @@ public class Utility
 			System.out.println(windChill);
 		}
 	}
+	
 	/**
 	 * @param x x-axis coordinate
 	 * @param y y-axis coordinate
@@ -341,6 +364,7 @@ public class Utility
 		double distance = Math.sqrt((x*x)+(y*y));
 		return distance;
 	}
+	
 	/**
 	 * @param number = number till which power of two has to be calculate
 	 * generate table of 2 pow 1 to 2 pow till number entered by user
@@ -361,6 +385,7 @@ public class Utility
 			}
 		}
 	}
+	
 	/**
 	 * @param number = represent till which number we have to find harmonic series sum
 	 * it print the sum of n harmonic number
@@ -381,6 +406,7 @@ public class Utility
 			System.out.println(sum);
 		}
 	}
+	
 	/**
 	 * @param number = takes number whose primeFactorization we have to found
 	 * print prime factor of the number
@@ -395,6 +421,7 @@ public class Utility
 			}
 		}
 	}
+	
 	/**
 	 * @param number = number which has to be checked whether prime or not
 	 * @return boolean if number prime then true else false
@@ -420,6 +447,7 @@ public class Utility
 		}
 		return b;
 	}
+	
 	/**
 	 * method to play tictoe game with computer
 	 */
@@ -488,11 +516,9 @@ public class Utility
 						row = 2;
 						colum = 2;
 						break;
-
 					default:
 						System.out.println("enter b/w 1 to 9");
-						continue;
-						
+						continue;					
 					}
 					if(x[row][colum].equals(" "))
 					{
@@ -559,6 +585,7 @@ public class Utility
 		}
 		System.out.println("game over");
 	}
+	
 	/**
 	 * @param x = input 2d array of String type
 	 * @return integer  number of " " in the array
@@ -578,6 +605,7 @@ public class Utility
 		}
 		return count;
 	}
+	
 	/**
 	 * @param x = to print the table of tietoe game on console
 	 */
@@ -589,6 +617,7 @@ public class Utility
 		System.out.println("------");
 		System.out.println(x[2][0]+"|"+x[2][1]+"|"+x[2][2]);
 	}
+	
 	/**
 	 * @param name = String which has to be printed with msg
 	 * check whether String is greater then 3 character if it is them print it with msg
@@ -605,7 +634,6 @@ public	static void hello(String name)
 	}
 
 	}
-
 
 	/**
 	 * @param numberOfTimes = number of times we have to flip the coin
@@ -630,7 +658,6 @@ public	static void hello(String name)
 	double tailPercent = (tail * 100) /numberOfTimes;
 	System.out.println("Head percent" + headPercent + "v/s tail Percent" + tailPercent);
 	}
-
 
 	/**
 	 * @param year= year which is to be checked whether leap or not
@@ -662,6 +689,7 @@ public	static void hello(String name)
 				return false;
 			}
 	}
+	
 	/**
 	 * @return current time of system
 	 */
@@ -669,6 +697,7 @@ public	static void hello(String name)
 	{
 		return  System.currentTimeMillis();
 	}
+	
 	/**
 	 * @return  current time of system
 	 */
@@ -676,6 +705,7 @@ public	static void hello(String name)
 	{
 		return  System.currentTimeMillis();
 	}
+	
 	/**
 	 * @param start =  time value 
 	 * @param end = time value
@@ -707,6 +737,7 @@ public	static void hello(String name)
 			}
 			return x;
 		}
+	
 		/**
 		 * @param x = name of String type array to be sorted
 		 * @return sorted array of String type
@@ -814,6 +845,7 @@ public	static void hello(String name)
 			}
 			vending(change,count,hashSet);
 		}
+		
 		/**
 		 * @param number = number to be checked whether palindrome or not
 		 * @return boolean true if number is palindrome else false
@@ -835,6 +867,7 @@ public	static void hello(String name)
 				return false;
 			}
 		}
+		
 		/**
 		 * @param n1 = number to be checked with other number whether it is anagram or not
 		 * @param n2 = number to be checked with other number whether it is anagram or not
@@ -874,6 +907,7 @@ public	static void hello(String name)
 			}
 			
 		}
+		
 		/**
 		 * @param v = value of temperature to be changed
 		 * @param c = determine whether value is in Celsius  or in Fahrenheit 
@@ -890,6 +924,7 @@ public	static void hello(String name)
 				return ((v-32)*5)/9;
 			}
 		}
+		
 		/**
 		 * @param x = name of the array to be sorted
 		 * @return sorted integer type array by useing insertionSort algorithm
@@ -911,6 +946,7 @@ public	static void hello(String name)
 			}
 			return x;
 		}
+		
 		/**
 		 * @param array = String type of array which is to be sorted
 		 * @return String type sorted array use insertion sort algo 
@@ -933,6 +969,7 @@ public	static void hello(String name)
 			}
 			return array;
 		}
+		
 		/**
 		 * @param array = integer type array which is to be sort 
 		 * @return sorted array useing bubblesort algo
@@ -953,6 +990,7 @@ public	static void hello(String name)
 			}
 			return array;
 		}
+	
 		/**
 		 * @param x =String type array which is to be sort 
 		 * @return sorted array useing bubblesort algo
@@ -974,6 +1012,7 @@ public	static void hello(String name)
 			}
 			return x;
 		}
+	
 		/**
 		 * @param m = month 
 		 * @param d = day of month
@@ -989,6 +1028,7 @@ public	static void hello(String name)
 			return d0;
 			
 		}
+		
        /**
      * @param dayOfWeek = int value of week day
      * print the week day
@@ -1037,6 +1077,7 @@ public	static void hello(String name)
 			double pay = (p*r)/(1-Math.pow(1+r, -n));
 			return pay;
 		}
+		
 		/**
 		 * @param c = number whose sqrt to be found
 		 * print the sqrt of number
@@ -1059,6 +1100,7 @@ public	static void hello(String name)
 				System.out.println("enter a positive number");
 			}
 		}
+		
 		/**
 		 * @param number = number which is to be converted to binary
 		 * convert the number into binary number
@@ -1092,6 +1134,7 @@ public	static void hello(String name)
 			String finalreprsentation = number1 + " = " + respretation.substring(1, respretation.length());
 			System.out.println(finalreprsentation);
 		}
+		
 		/**
 		 * @param number = number to be converted into binary
 		 * convert number into binary then swap it from center then convert new binary to number
@@ -1128,6 +1171,7 @@ public	static void hello(String name)
 			}
 			System.out.println(number2);
 	}
+		
 		 /**
 		 * @param str = string input 
 		 * @param l = index to be kept constant
@@ -1148,6 +1192,7 @@ public	static void hello(String name)
 		            }
 		        }
 		    }
+		
 		 /**
 		 * @param str=name of the string whose charater are to be swaped
 		 * @param first= index of character to be swaped
@@ -1163,6 +1208,7 @@ public	static void hello(String name)
 		        charArray[j] = temp;
 		        return String.valueOf(charArray);
 		    }
+		
 	/**
 	 * @throws IOException while reading file if file is not present
 	 */
@@ -1183,6 +1229,7 @@ public	static void hello(String name)
 			}
 			linkedlistdatatofile(refernces);
 		}
+	
 	/**
 	 * @param fileName from which file we will read data
 	 * @param refernces linkedlist refrense variable
@@ -1205,6 +1252,7 @@ public	static void hello(String name)
 			bufferedReadder.close();
 			return refernces;
 		}
+	
 	/**
 	 * @param refernces refrence variable of linklist in which data is stored
 	 * @throws IOException if while writeing data to file file is not present
@@ -1223,6 +1271,7 @@ public	static void hello(String name)
 			printWriter.flush();
 			printWriter.close();
 		}
+	
 	/**
 	 * @throws IOException for file not found
 	 * read integer from file and save it in sorted linked list them take integer as input
@@ -1257,6 +1306,7 @@ public	static void hello(String name)
 		integerDataToFile(linkedlist,"integerdata1.text");
 		bufferedReader.close();
 	}
+	
 	/**
 	 * @param refrences = refrence variable of linkedlist 
 	 * @param fileName = name of file in which data is to be pushed
@@ -1276,6 +1326,7 @@ public	static void hello(String name)
 		printWriter.flush();
 		printWriter.close();
 	}
+	
 	/**
 	 * @param ArithmeticExpression = string ArithmeticExpression which is to be checked balance or not
 	 * @return boolean true if expression is balanced else false
@@ -1327,6 +1378,7 @@ public	static void hello(String name)
 		int d0 = (d+x+((31*m0)/12)) % 7;
 		return d0;
 	}
+	
 /**
  * @param month
  * @param year
@@ -1392,6 +1444,7 @@ public static	void printMonthCalender(int month,int year)
 			System.out.println();
 		}
 	}
+
 /**
  * @param month
  * @param year
@@ -1421,6 +1474,7 @@ public static int maxDays(int month,int year)
 	}
 	return maxdays;
 }
+
 /**
  * @param month
  * @param year
@@ -1486,6 +1540,7 @@ public static void calenderWithStack(int month,int year)
 		System.out.println();
 	}
 }
+
 /**
  * @param start = starting number from where prime number is to found
  * @param end = number till which prime number to be found
@@ -1503,6 +1558,7 @@ public static ArrayList<Integer> primeNumberInRange(int start, int end)
 	}
 	return arrayList;
 }
+
 /**
  * @param arrayList = refrence of arraylist which will be converted to 2d array
  */
@@ -1541,6 +1597,7 @@ public static void arraylistTo2DArray(ArrayList<Integer> arrayList)
 	}
 	
 }
+
 /**
  * @param arrayList= refrence of arraylist storeing some data
  * @return treeset haveing anagram
@@ -1561,6 +1618,7 @@ public static TreeSet<Integer> anagramInArraylist(ArrayList<Integer> arrayList)
 	}
 	return treeSet;
 }
+
 /**
  * @param treeSet refrence of tree set to be converted to 2d array
  */
@@ -1598,6 +1656,7 @@ public static void treesetTo2DArray(TreeSet<Integer> treeSet)
 		System.out.println();
 	}
 }
+
 /**
  * @param node = number of node of binary search tree
  * @return posible outcome for binary serach tree
@@ -1618,6 +1677,7 @@ public static long binarySearchTree(int node)
 		return sum;
 	}
 }
+
 /**
  * @throws FileNotFoundException
  * to take the user input about the inventory and add it to json file
@@ -1696,6 +1756,7 @@ public static void writeInventoryJsonFile() throws FileNotFoundException
 	printWriter.close();
 	
 }
+
 /**
  * @param filename = string argument of json file name
  * @return the json object present in the file 
@@ -1709,6 +1770,7 @@ public static JSONObject readFromJsonFile(String filename) throws FileNotFoundEx
     JSONObject jo = (JSONObject) obj;
     return jo;
 }
+
 /**
  * @param jsonObject = Json object haveing details of inventory
  * print calculated data of inventory 
@@ -1752,6 +1814,7 @@ public static void inventoryData(JSONObject jsonObject)
 		System.out.println("total price for pulse of varity " + name + " is " + sum);
 	}
 }
+
 /**
  * @throws IOException
  * @throws ParseException
@@ -1837,6 +1900,7 @@ public static void writeStockJsonFile() throws IOException, ParseException
 	printWriter.flush();
 	printWriter.close();		
 }
+
 /**
  * @throws FileNotFoundException
  * @throws IOException
@@ -1877,6 +1941,7 @@ public static void printJsonObjectToFile(String fileName, JSONObject jsonObject)
 	printWriter.flush();
 	printWriter.close();
 }
+
 /**
  * @throws FileNotFoundException 
  * @throws IOException
@@ -1920,6 +1985,7 @@ public static void add() throws FileNotFoundException, IOException, ParseExcepti
 	printJsonObjectToFile("address.json", jsonObject);
 	System.out.println("person detail added in address book");
 }
+
 /**
  * @throws FileNotFoundException
  * @throws IOException
@@ -2010,6 +2076,7 @@ public static void edit() throws FileNotFoundException, IOException, ParseExcept
 	}
 	
 }
+
 /**
  * @throws FileNotFoundException
  * @throws IOException
@@ -2051,6 +2118,7 @@ public static void delete() throws FileNotFoundException, IOException, ParseExce
 		System.out.println("person not persent in address book");
 	}
 }
+
 /**
  * @throws FileNotFoundException
  * @throws IOException
@@ -2089,6 +2157,7 @@ public static void sortByName() throws FileNotFoundException, IOException, Parse
 		System.out.println(jsonArray.get(i));
 	}
 }
+
 /**
  * @throws FileNotFoundException
  * @throws IOException
@@ -2130,6 +2199,7 @@ public static void sortByZip() throws FileNotFoundException, IOException, ParseE
 		System.out.println(jsonArray.get(i));
 	}
 }
+
 /**
  * @throws FileNotFoundException
  * @throws IOException
@@ -2146,6 +2216,7 @@ public static void displayAddressBook() throws FileNotFoundException, IOExceptio
 	}
 	
 }
+
 /**
  * @return arraylist haveing four string[] array each storeing players of cards
  */
@@ -2228,6 +2299,7 @@ public static ArrayList<String[]> deckOfCards()
 	arrayList.add(player4);
 	return arrayList;
  }
+
 /**
  * @return return the array haveing cards of four player in sequence
  */
@@ -2320,6 +2392,7 @@ public static ArrayList<String[]> cardsInSequence()
 	}
 return swapList;	
 }
+
 /**
  * @throws FileNotFoundException
  * @throws IOException
@@ -2372,7 +2445,6 @@ public static void addDoctor() throws FileNotFoundException, IOException, ParseE
 	JSONObject appointment = readFromJsonFile("appointment.json");
 	appointment.put(id, new JSONObject());
 	
-	
 	newDoctorObject.put("id", id);
 	newDoctorObject.put("name", doctorName);
 	newDoctorObject.put("specialization", doctorSpecialization);
@@ -2382,6 +2454,7 @@ public static void addDoctor() throws FileNotFoundException, IOException, ParseE
 	printJsonObjectToFile("doctor.json", jsonObjectDoctor);
 	printJsonObjectToFile("appointment.json", appointment);
 	}
+
 /**
  * @throws FileNotFoundException
  * @throws IOException
@@ -2434,6 +2507,7 @@ public static void addPatients() throws FileNotFoundException, IOException, Pars
 	jsonObjectPatients.put("patients", jsonArraypatients);
 	printJsonObjectToFile("patients.json", jsonObjectPatients);	
 }
+
 /**
  * @param pateint
  * @throws FileNotFoundException
@@ -2468,6 +2542,7 @@ public static void serachAndbookdoctor(JSONObject pateint) throws FileNotFoundEx
 		break;
 	}
 }
+
 /**
  * @param doctorSpecialization = string argument to take doctor Specialization
  * @param pateint = json object argument to keep track which patient is serching the doctor
@@ -2565,6 +2640,7 @@ public static void serachDoctorById(String doctorId,JSONObject pateint) throws F
 		System.out.println("the doctor you serched is not avaliable");
 	}
 }
+
 /**
  * @param doctorName = string argument to take docter name which is been serched
  * @param pateint = json object of patient who is serching docter
@@ -2612,6 +2688,7 @@ public static void serachDoctorByName(String doctorName,JSONObject pateint) thro
 		System.out.println("the doctor you serched is not avaliable");
 	}
 }
+
 /**
  * @param id = to take doctor id
  * @param patient = json object of patient who is serching the doctor
@@ -2673,6 +2750,7 @@ static void checkavalbilityOfdocterbyId(String id,JSONObject patient) throws Fil
 		}
 	}
 }
+
 /**
  * @throws FileNotFoundException
  * @throws IOException
@@ -2768,6 +2846,7 @@ public static void searchPatient() throws FileNotFoundException, IOException, Pa
 		break;
 	}
 }
+
 /**
  * @throws FileNotFoundException
  * @throws IOException
@@ -2817,6 +2896,7 @@ public static void bestDoctor() throws FileNotFoundException, IOException, Parse
 	 System.out.println("best doctor of clinice details");
 	 System.out.println(bestdoctoerDetails);
 }
+
 /**
  * @param doctorId = to take doctor to be serched id as string
  * @return json object of docter detail if found else return null
@@ -2840,6 +2920,7 @@ public static JSONObject getDocterDetailsById(String doctorId) throws FileNotFou
 	}
 	return null;
 }
+
 /**
  * @throws FileNotFoundException
  * @throws IOException
@@ -2886,6 +2967,7 @@ public static void doctorPatientList() throws FileNotFoundException, IOException
 		System.out.println("==============================");
 	}
 }
+
 /**
  * @param date = to take argument as date
  * @return = present date in proper format
@@ -2921,31 +3003,42 @@ public String convertString(UserDetails userDetails,String message)
 
 	return message;
 }
-public String getFileText(String fileName){
-	BufferedReader br=null;
-	try{
 
+/**
+ * @param fileName
+ * @return data present in the file in form of string
+ */
+public String getFileText(String fileName)
+{
+	BufferedReader br=null;
+	try
+	{
 		br = new BufferedReader(new FileReader(fileName));
 		StringBuilder sb=new StringBuilder();
 		String line=br.readLine();
-		while(line!=null){
+		while(line!=null)
+		{
 			sb.append(line);
 			sb.append(System.lineSeparator());
 			line=br.readLine();
 		}
 		return sb.toString();
 	 }
-	catch(Exception exception){
+	catch(Exception exception)
+	{
 		return null;
 	}
-	finally {
-		try {
+	finally 
+	{
+		try 
+		{
 			br.close();
-		} catch (IOException e) {
+		}
+		catch (IOException e) 
+		{
 			e.printStackTrace();
 		}
-	}
-	
+	}	
 }
 
 /**
@@ -2965,6 +3058,7 @@ public static java.util.LinkedList<JSONObject> addCompanytoList() throws FileNot
 	}
 	return linkedList;
 }
+
 /**
  * @throws FileNotFoundException
  * @throws IOException
@@ -3020,6 +3114,7 @@ public static void addShareCompany() throws FileNotFoundException, IOException, 
 	printJsonObjectToFile("share.json", jsonObjectshare);
 	System.out.println("share company added succes");
 }
+
 /**
  * @throws FileNotFoundException
  * @throws IOException
@@ -3059,6 +3154,7 @@ public static void deleteShareCompany() throws FileNotFoundException, IOExceptio
 		System.out.println("no share symbol present as = " + shareSymbol);
 	}
 }
+
 /**
  * @return linkedList haveing details of share company
  * @throws FileNotFoundException
@@ -3079,6 +3175,7 @@ public static java.util.LinkedList<JSONObject> shareTransectionInList() throws F
 	}
 	return linkedList;
 }
+
 /**
  * @return queue Of json object haveing transection detail
  * @throws FileNotFoundException
@@ -3099,6 +3196,7 @@ public static java.util.Queue<JSONObject> shareTransectionInQueue() throws FileN
 	}
 	return queue;
 }
+
 /**
  * @param fileName
  * @throws FileNotFoundException
@@ -3145,6 +3243,7 @@ public static void stockAccount(String fileName) throws FileNotFoundException, I
 	printWriter.close();
 	System.out.println(printDate());
 }
+
 /**
  * @param useramountEnter = for which amount user has to buy share
  * @param symbol = which share we want to buy
@@ -3231,8 +3330,7 @@ public static Map buy(double useramountEnter,String symbol,Map stockMap) throws 
 				String newStockAmountString = Double.toString(newStockAmount);
 				String newShareOfStockString = Integer.toString(newShareOfStock);
 				String newShareOfSymbolString = Integer.toString(newShareOfSymbol);
-				
-				
+								
 				stockMap.put("amount", newStockAmountString);
 				stockMap.put("totalShare", newShareOfStockString);
 				stockMap.put(symbol, newShareOfSymbolString);
@@ -3274,6 +3372,7 @@ public static Map buy(double useramountEnter,String symbol,Map stockMap) throws 
 	}
 	return stockMap;
 }
+
 /**
  * @param stockMap = stock details which wants to sell share
  * @return update details of stock
@@ -3360,9 +3459,7 @@ public static Map sell(Map stockMap) throws FileNotFoundException, IOException, 
 			JSONObject newjsonObjectSellBuy = new JSONObject();
 			
 			String stockName = (String) stockMap.get("stockName");
-			String numberOfShareToBeSellString = Integer.toString(numberOfShareToBeSell);
-			
-			
+			String numberOfShareToBeSellString = Integer.toString(numberOfShareToBeSell);			
 			
 			newjsonObjectSellBuy.put("stockName", stockName);
 			newjsonObjectSellBuy.put("shareSymbol", symbol);
@@ -3373,12 +3470,7 @@ public static Map sell(Map stockMap) throws FileNotFoundException, IOException, 
 			
 			jsonObjectShareSellBuy.put("transaction", shareSellBuyArray);
 			
-			
-			
 			Utility.printJsonObjectToFile("shareSellBuy.json", jsonObjectShareSellBuy);
-			
-			
-			
 			
 		}
 		else
@@ -3392,6 +3484,7 @@ public static Map sell(Map stockMap) throws FileNotFoundException, IOException, 
 	}	
 	return stockMap;
 }
+
 /**
  * @throws FileNotFoundException
  * @throws IOException
@@ -3409,6 +3502,7 @@ public static void printReport() throws FileNotFoundException, IOException, Pars
 		System.out.println(stockMap);	
 	}
 }
+
 /**
  * @return return the object of current date and time
  */
@@ -3418,6 +3512,7 @@ public static String printDate()
 	String d = new SimpleDateFormat("E yyyy.MM.dd 'at' hh:mm:ss a").format(date);
 	return d;
 }
+
 /**
  * @throws FileNotFoundException
  * @throws IOException
@@ -3484,8 +3579,6 @@ public static void stockAccountController() throws FileNotFoundException, IOExce
 				jsonObjectStock.put("user", jsonArrayuser);
 				
 				Utility.printJsonObjectToFile("stockAccount.json", jsonObjectStock);
-				
-				
 			}
 			else
 			{
@@ -3537,8 +3630,9 @@ public static void stockAccountController() throws FileNotFoundException, IOExce
 	}
 	while(start < 5);
 }
+
 /**
- * control the function of bancking system
+ * control the function of banking system
  */
 public static void bankController()
 {
@@ -3602,6 +3696,7 @@ public static void bankController()
 		System.out.println(person.Name + "----" + person.moneyHehad);
 	}
 }
+
 /**
  * print the month calender by takeing user input
  * with help of queue 
@@ -3619,19 +3714,23 @@ public static void calenderWithQueueControler()
 	int maxDay = Utility.maxDays(month, year);
 	int numberOfObject;
 	int date = 0;
-	if (maxDay + start > 35) {
+	if (maxDay + start > 35) 
+	{
 		numberOfObject = 6;
 	}
 	else 
 	{
 		numberOfObject = 5;
 	}
-	for (int i = 0; i < numberOfObject; i++) {
+	for (int i = 0; i < numberOfObject; i++) 
+	{
 		week.add(new java.util.LinkedList<>());
 	}
-	for (int i = 0; i < numberOfObject; i++) {
+	for (int i = 0; i < numberOfObject; i++) 
+	{
 		Queue queue = (Queue) week.poll();
-		if (i == 0) {
+		if (i == 0) 
+		{
 			for (int j = 0; j < start; j++)
 			{
 				queue.add(" ");
@@ -3667,6 +3766,7 @@ public static void calenderWithQueueControler()
 		System.out.println();
 	}
 }
+
 /**
  * @param stringForPalindrome = name of string which is to be checked palindrome or not
  * @return boolean true if string is palandrome else return false
@@ -3697,6 +3797,7 @@ public static boolean palindromeWithDeqeue(String stringForPalindrome)
 	}
 	return check;
 }
+
 /**
  * print prime and anagram bettween 1 to 1000 by stack
  */
@@ -3728,6 +3829,7 @@ public static void primeAnagramUseingStack()
 		System.out.println((Integer)stack.pop());
 	}
 }
+
 /**
  * print prime and anagram bettween 1 to 1000 by queue
  */
@@ -3759,6 +3861,7 @@ public static void primeAnagramUseingQueue()
 		System.out.println((Integer)queue.dequeue());
 			}
 }
+
 /**
  * @throws IOException for if file not found
  * take number from file and arrange them in slot
@@ -3826,13 +3929,13 @@ public static void numberInSlotControler() throws IOException
 						printWriter.print(lk.dataAtPosition(j)+" ");
 					}
 					printWriter.println("\n");
-
 				}
 		}
 	printWriter.flush();
 	printWriter.close();
 	bufferedReader.close();
 }
+
 /**
  * @param arrayList = contion 4 string[] array each haveing player cards
  * print the card of each player
@@ -3867,6 +3970,7 @@ public static void printCardsOfPlayers(ArrayList<String[]> arrayList)
 		System.out.println(array[i]);
 	}
 }
+
 /**
  * @param array = array to be sorted
  * @param low = 0
@@ -3905,6 +4009,7 @@ public static void mergesort(int array[],int low,int high)
 	for (int k = 0; k < n; k++) 
         array[low + k] = temp[k];   
 }
+
 /**
  * @param array = name of the array in which value is to be searched
  * @param intElement = elemnet to be serached 
@@ -3935,6 +4040,7 @@ public static <T extends Comparable<T>> void binarySearch(T[] array,T intElement
 		}
 	}
 }
+
 /**
  * @return Interger type of array
  */
@@ -3952,6 +4058,7 @@ public static Integer[] inputIntegerArray()
 	}
 	return array;
 }
+
 /**
  * @return string type of array
  */
@@ -3968,6 +4075,11 @@ public static String[] inputStringArray()
 	}
 	return array;
 }
+
+/**
+ * @return arra which we entered 
+ * to take integer array input
+ */
 public static int[] inputintegerArray()
 {
 	Utility utility = new Utility();
@@ -3981,6 +4093,12 @@ public static int[] inputintegerArray()
 	}
 	return array;
 }
+
+/**
+ * @param filename
+ * @throws IOException
+ * to search word in file by binary
+ */
 public static void readFileAndBinarySearch(String filename) throws IOException
 {
 	Utility utility = new Utility();
@@ -4005,14 +4123,60 @@ public static void readFileAndBinarySearch(String filename) throws IOException
 	System.out.println("enter the word to bhe searched");
 	String serched = utility.inputString();
 	binarySearch(wordList, serched, 0, wordList.length-1);
-
-}
 }
 
-
-
-
-
-
-
-
+/**
+ * @param num = number which has been imagine
+ * 
+ */
+public static void imaginenumber( int num) 
+{
+	int RANGE = (int) Math.pow(2, num-1);
+	System.out.println("Take number between '0' to "+RANGE);
+	int COUNT=0;
+	String INPUT=null;
+	int LOWER=0;
+	int UPPER=RANGE;
+	int MIDDLE=(LOWER+UPPER/2);
+	
+	System.out.println("Is your number:"+MIDDLE);
+	
+	System.out.println("Enter your answer in 'yes' or 'high' or 'low'");
+	INPUT=scanner.next();
+   	do
+    {
+        if (INPUT.equals("high"))
+        {
+			LOWER= MIDDLE;
+			COUNT++;
+        }
+		else if (INPUT.equals("yes"))
+        {
+			System.out.println("The number you thought was: "+MIDDLE);
+			int no=COUNT+1;
+			System.out.println("It takes "+no+" times to find your exact number");
+			break;
+        }
+		else if(INPUT.equals("low"))
+        {
+			UPPER=MIDDLE;
+			COUNT++;
+		}
+        if(COUNT<num)
+        {
+			MIDDLE=(LOWER+ UPPER+1)/2;
+			System.out.println("Is your number "+MIDDLE+":");
+			INPUT=scanner.next();
+		}
+	}
+	while(LOWER<=UPPER);
+		if (COUNT>num)
+		{
+			System.out.println("Number not found");
+		}
+		else
+		{
+			System.exit(0);
+		}
+}
+}
